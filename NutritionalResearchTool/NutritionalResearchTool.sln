@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{64C4F503-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionalResearchBusiness", "NutritionalResearchBusiness\NutritionalResearchBusiness.csproj", "{66A70464-FDFD-4A34-84F5-CBD73107BC26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionalResearchToolApplication", "NutritionalResearchToolApplication\NutritionalResearchToolApplication.csproj", "{12D5F319-BC89-4484-8592-C42D1AC8D84A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,16 @@ Global
 		{66A70464-FDFD-4A34-84F5-CBD73107BC26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66A70464-FDFD-4A34-84F5-CBD73107BC26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66A70464-FDFD-4A34-84F5-CBD73107BC26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D5F319-BC89-4484-8592-C42D1AC8D84A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D5F319-BC89-4484-8592-C42D1AC8D84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D5F319-BC89-4484-8592-C42D1AC8D84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D5F319-BC89-4484-8592-C42D1AC8D84A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{66A70464-FDFD-4A34-84F5-CBD73107BC26} = {64C4F503-19A8-42A3-8FF1-28DB7B642922}
+		{12D5F319-BC89-4484-8592-C42D1AC8D84A} = {86742D94-EA3B-4177-8E8F-8D192869C0E7}
 	EndGlobalSection
 EndGlobal
