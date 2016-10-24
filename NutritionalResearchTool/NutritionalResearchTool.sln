@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{86742D94-EA3B-4177-8E8F-8D192869C0E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{64C4F503-19A8-42A3-8FF1-28DB7B642922}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionalResearchBusiness", "NutritionalResearchBusiness\NutritionalResearchBusiness.csproj", "{66A70464-FDFD-4A34-84F5-CBD73107BC26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66A70464-FDFD-4A34-84F5-CBD73107BC26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66A70464-FDFD-4A34-84F5-CBD73107BC26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66A70464-FDFD-4A34-84F5-CBD73107BC26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66A70464-FDFD-4A34-84F5-CBD73107BC26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66A70464-FDFD-4A34-84F5-CBD73107BC26} = {64C4F503-19A8-42A3-8FF1-28DB7B642922}
+	EndGlobalSection
+EndGlobal
