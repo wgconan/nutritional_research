@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6afcac7d2a5e4688adaba640b77fd687" Name="Diagram1">
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.FoodCategory" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.FoodNutritions" Width="1.5" PointX="10.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.Foods" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.InvestigationAnswer" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.InvestigationRecord" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.NuritiveElement" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.NutrtiveElementIntakeStatistics" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.Question" Width="1.5" PointX="5.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.ReferenceDiagram" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.StructureOfMeals" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_FOODS_REFERENCE_FOODCATE" ManuallyRouted="false" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_FOODNUTR_REFERENCE_FOODS" ManuallyRouted="false" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_INVESTIG_REFERENCE_INVESTIG" ManuallyRouted="false" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_NUTRTIVE_REFERENCE_INVESTIG" ManuallyRouted="false" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_STRUCTUR_REFERENCE_INVESTIG" ManuallyRouted="false" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_REFERENC_REFERENCE_QUESTION" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

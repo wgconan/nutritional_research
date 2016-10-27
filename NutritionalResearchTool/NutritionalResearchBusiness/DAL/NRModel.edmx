@@ -1,0 +1,663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NutritionalResearchDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FoodCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstCategoryCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FirstCategoryName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SecondCategoryCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SecondCategoryName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="FoodUnit" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="StatisticsCategoryCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="StatisticsCategoryName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FoodNutritions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FoodId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NutritiveElementId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Foods">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="TypicalFood" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FoodsDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="Proportion" Type="float" Nullable="false" />
+          <Property Name="Edible" Type="float" />
+        </EntityType>
+        <EntityType Name="InvestigationAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InvestigationRecordId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QuestionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QuestionType" Type="int" Nullable="false" />
+          <Property Name="AnswerType" Type="int" Nullable="false" />
+          <Property Name="AnswerValue1" Type="int" />
+          <Property Name="AnswerValue2" Type="float" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdationTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="InvestigationRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QueueId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="HealthBookId" Type="varbinary" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Birthday" Type="datetime" Nullable="false" />
+          <Property Name="Week" Type="int" Nullable="false" />
+          <Property Name="Stage" Type="int" Nullable="false" />
+          <Property Name="Height" Type="float" Nullable="false" />
+          <Property Name="BeforeWeight" Type="float" Nullable="false" />
+          <Property Name="BeforeBMI" Type="float" Nullable="false" />
+          <Property Name="CurrentWeight" Type="float" Nullable="false" />
+          <Property Name="InvestigatorName" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="AuditorName" Type="nvarchar" MaxLength="16" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdatetionTime" Type="datetime" />
+          <Property Name="AuditTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NuritiveElement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ChineseName" Type="nvarchar" MaxLength="20" />
+          <Property Name="EnglishName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChineseUnit" Type="nvarchar" MaxLength="20" />
+          <Property Name="EnglishUnit" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Stage1StandardValue" Type="float" />
+          <Property Name="Stage2StandardValue" Type="float" />
+          <Property Name="Stage3StandardValue" Type="float" />
+        </EntityType>
+        <EntityType Name="NutrtiveElementIntakeStatistics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NutritiveElementId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IntakeValue" Type="float" Nullable="false" />
+          <Property Name="RNI_AIValue" Type="float" />
+          <Property Name="RNIRatio" Type="float" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SerialNumber" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReferenceDiagram">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="QuestionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IconPath" Type="nvarchar" MaxLength="256" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StructureOfMeals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FoodCategoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Intake" Type="float" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdationTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FOODNUTR_REFERENCE_FOODS">
+          <End Role="Foods" Type="Self.Foods" Multiplicity="1" />
+          <End Role="FoodNutritions" Type="Self.FoodNutritions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Foods">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodNutritions">
+              <PropertyRef Name="FoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FOODS_REFERENCE_FOODCATE">
+          <End Role="FoodCategory" Type="Self.FoodCategory" Multiplicity="1" />
+          <End Role="Foods" Type="Self.Foods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Foods">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVESTIG_REFERENCE_INVESTIG">
+          <End Role="InvestigationRecord" Type="Self.InvestigationRecord" Multiplicity="1" />
+          <End Role="InvestigationAnswer" Type="Self.InvestigationAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvestigationRecord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvestigationAnswer">
+              <PropertyRef Name="InvestigationRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NUTRTIVE_REFERENCE_INVESTIG">
+          <End Role="InvestigationRecord" Type="Self.InvestigationRecord" Multiplicity="1" />
+          <End Role="NutrtiveElementIntakeStatistics" Type="Self.NutrtiveElementIntakeStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvestigationRecord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NutrtiveElementIntakeStatistics">
+              <PropertyRef Name="RecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REFERENC_REFERENCE_QUESTION">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="ReferenceDiagram" Type="Self.ReferenceDiagram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReferenceDiagram">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STRUCTUR_REFERENCE_INVESTIG">
+          <End Role="InvestigationRecord" Type="Self.InvestigationRecord" Multiplicity="1" />
+          <End Role="StructureOfMeals" Type="Self.StructureOfMeals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvestigationRecord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StructureOfMeals">
+              <PropertyRef Name="RecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NutritionalResearchDatabaseModelStoreContainer">
+          <EntitySet Name="FoodCategory" EntityType="Self.FoodCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodNutritions" EntityType="Self.FoodNutritions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Foods" EntityType="Self.Foods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvestigationAnswer" EntityType="Self.InvestigationAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvestigationRecord" EntityType="Self.InvestigationRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NuritiveElement" EntityType="Self.NuritiveElement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NutrtiveElementIntakeStatistics" EntityType="Self.NutrtiveElementIntakeStatistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferenceDiagram" EntityType="Self.ReferenceDiagram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StructureOfMeals" EntityType="Self.StructureOfMeals" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FOODNUTR_REFERENCE_FOODS" Association="Self.FK_FOODNUTR_REFERENCE_FOODS">
+            <End Role="Foods" EntitySet="Foods" />
+            <End Role="FoodNutritions" EntitySet="FoodNutritions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FOODS_REFERENCE_FOODCATE" Association="Self.FK_FOODS_REFERENCE_FOODCATE">
+            <End Role="FoodCategory" EntitySet="FoodCategory" />
+            <End Role="Foods" EntitySet="Foods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVESTIG_REFERENCE_INVESTIG" Association="Self.FK_INVESTIG_REFERENCE_INVESTIG">
+            <End Role="InvestigationRecord" EntitySet="InvestigationRecord" />
+            <End Role="InvestigationAnswer" EntitySet="InvestigationAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NUTRTIVE_REFERENCE_INVESTIG" Association="Self.FK_NUTRTIVE_REFERENCE_INVESTIG">
+            <End Role="InvestigationRecord" EntitySet="InvestigationRecord" />
+            <End Role="NutrtiveElementIntakeStatistics" EntitySet="NutrtiveElementIntakeStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENC_REFERENCE_QUESTION" Association="Self.FK_REFERENC_REFERENCE_QUESTION">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="ReferenceDiagram" EntitySet="ReferenceDiagram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STRUCTUR_REFERENCE_INVESTIG" Association="Self.FK_STRUCTUR_REFERENCE_INVESTIG">
+            <End Role="InvestigationRecord" EntitySet="InvestigationRecord" />
+            <End Role="StructureOfMeals" EntitySet="StructureOfMeals" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NutritionalResearchDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FoodCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="FirstCategoryCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstCategoryName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecondCategoryCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SecondCategoryName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FoodUnit" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StatisticsCategoryCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StatisticsCategoryName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Foods" Relationship="Self.FK_FOODS_REFERENCE_FOODCATE" FromRole="FoodCategory" ToRole="Foods" />
+        </EntityType>
+        <EntityType Name="FoodNutritions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="FoodId" Type="Guid" Nullable="false" />
+          <Property Name="NutritiveElementId" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Foods" Relationship="Self.FK_FOODNUTR_REFERENCE_FOODS" FromRole="FoodNutritions" ToRole="Foods" />
+        </EntityType>
+        <EntityType Name="Foods">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CategoryId" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TypicalFood" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FoodsDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Proportion" Type="Double" Nullable="false" />
+          <Property Name="Edible" Type="Double" />
+          <NavigationProperty Name="FoodCategory" Relationship="Self.FK_FOODS_REFERENCE_FOODCATE" FromRole="Foods" ToRole="FoodCategory" />
+          <NavigationProperty Name="FoodNutritions" Relationship="Self.FK_FOODNUTR_REFERENCE_FOODS" FromRole="Foods" ToRole="FoodNutritions" />
+        </EntityType>
+        <EntityType Name="InvestigationAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="InvestigationRecordId" Type="Guid" Nullable="false" />
+          <Property Name="QuestionId" Type="Guid" Nullable="false" />
+          <Property Name="QuestionType" Type="Int32" Nullable="false" />
+          <Property Name="AnswerType" Type="Int32" Nullable="false" />
+          <Property Name="AnswerValue1" Type="Int32" />
+          <Property Name="AnswerValue2" Type="Double" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdationTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InvestigationRecord" Relationship="Self.FK_INVESTIG_REFERENCE_INVESTIG" FromRole="InvestigationAnswer" ToRole="InvestigationRecord" />
+        </EntityType>
+        <EntityType Name="InvestigationRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="QueueId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HealthBookId" Type="Binary" MaxLength="10" FixedLength="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Week" Type="Int32" Nullable="false" />
+          <Property Name="Stage" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Double" Nullable="false" />
+          <Property Name="BeforeWeight" Type="Double" Nullable="false" />
+          <Property Name="BeforeBMI" Type="Double" Nullable="false" />
+          <Property Name="CurrentWeight" Type="Double" Nullable="false" />
+          <Property Name="InvestigatorName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AuditorName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatetionTime" Type="DateTime" Precision="3" />
+          <Property Name="AuditTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InvestigationAnswer" Relationship="Self.FK_INVESTIG_REFERENCE_INVESTIG" FromRole="InvestigationRecord" ToRole="InvestigationAnswer" />
+          <NavigationProperty Name="NutrtiveElementIntakeStatistics" Relationship="Self.FK_NUTRTIVE_REFERENCE_INVESTIG" FromRole="InvestigationRecord" ToRole="NutrtiveElementIntakeStatistics" />
+          <NavigationProperty Name="StructureOfMeals" Relationship="Self.FK_STRUCTUR_REFERENCE_INVESTIG" FromRole="InvestigationRecord" ToRole="StructureOfMeals" />
+        </EntityType>
+        <EntityType Name="NuritiveElement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ChineseName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EnglishName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChineseUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EnglishUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Stage1StandardValue" Type="Double" />
+          <Property Name="Stage2StandardValue" Type="Double" />
+          <Property Name="Stage3StandardValue" Type="Double" />
+        </EntityType>
+        <EntityType Name="NutrtiveElementIntakeStatistics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RecordId" Type="Guid" Nullable="false" />
+          <Property Name="NutritiveElementId" Type="Guid" Nullable="false" />
+          <Property Name="IntakeValue" Type="Double" Nullable="false" />
+          <Property Name="RNI_AIValue" Type="Double" />
+          <Property Name="RNIRatio" Type="Double" />
+          <NavigationProperty Name="InvestigationRecord" Relationship="Self.FK_NUTRTIVE_REFERENCE_INVESTIG" FromRole="NutrtiveElementIntakeStatistics" ToRole="InvestigationRecord" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SerialNumber" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ReferenceDiagram" Relationship="Self.FK_REFERENC_REFERENCE_QUESTION" FromRole="Question" ToRole="ReferenceDiagram" />
+        </EntityType>
+        <EntityType Name="ReferenceDiagram">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="QuestionId" Type="Guid" Nullable="false" />
+          <Property Name="IconPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_REFERENC_REFERENCE_QUESTION" FromRole="ReferenceDiagram" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="StructureOfMeals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RecordId" Type="Guid" Nullable="false" />
+          <Property Name="FoodCategoryId" Type="Guid" Nullable="false" />
+          <Property Name="Intake" Type="Double" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="InvestigationRecord" Relationship="Self.FK_STRUCTUR_REFERENCE_INVESTIG" FromRole="StructureOfMeals" ToRole="InvestigationRecord" />
+        </EntityType>
+        <Association Name="FK_FOODS_REFERENCE_FOODCATE">
+          <End Role="FoodCategory" Type="Self.FoodCategory" Multiplicity="1" />
+          <End Role="Foods" Type="Self.Foods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Foods">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FOODNUTR_REFERENCE_FOODS">
+          <End Role="Foods" Type="Self.Foods" Multiplicity="1" />
+          <End Role="FoodNutritions" Type="Self.FoodNutritions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Foods">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodNutritions">
+              <PropertyRef Name="FoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVESTIG_REFERENCE_INVESTIG">
+          <End Role="InvestigationRecord" Type="Self.InvestigationRecord" Multiplicity="1" />
+          <End Role="InvestigationAnswer" Type="Self.InvestigationAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvestigationRecord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvestigationAnswer">
+              <PropertyRef Name="InvestigationRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NUTRTIVE_REFERENCE_INVESTIG">
+          <End Role="InvestigationRecord" Type="Self.InvestigationRecord" Multiplicity="1" />
+          <End Role="NutrtiveElementIntakeStatistics" Type="Self.NutrtiveElementIntakeStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvestigationRecord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NutrtiveElementIntakeStatistics">
+              <PropertyRef Name="RecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STRUCTUR_REFERENCE_INVESTIG">
+          <End Role="InvestigationRecord" Type="Self.InvestigationRecord" Multiplicity="1" />
+          <End Role="StructureOfMeals" Type="Self.StructureOfMeals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvestigationRecord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StructureOfMeals">
+              <PropertyRef Name="RecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REFERENC_REFERENCE_QUESTION">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="ReferenceDiagram" Type="Self.ReferenceDiagram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReferenceDiagram">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NutritionalResearchDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FoodCategory" EntityType="Self.FoodCategory" />
+          <EntitySet Name="FoodNutritions" EntityType="Self.FoodNutritions" />
+          <EntitySet Name="Foods" EntityType="Self.Foods" />
+          <EntitySet Name="InvestigationAnswer" EntityType="Self.InvestigationAnswer" />
+          <EntitySet Name="InvestigationRecord" EntityType="Self.InvestigationRecord" />
+          <EntitySet Name="NuritiveElement" EntityType="Self.NuritiveElement" />
+          <EntitySet Name="NutrtiveElementIntakeStatistics" EntityType="Self.NutrtiveElementIntakeStatistics" />
+          <EntitySet Name="Question" EntityType="Self.Question" />
+          <EntitySet Name="ReferenceDiagram" EntityType="Self.ReferenceDiagram" />
+          <EntitySet Name="StructureOfMeals" EntityType="Self.StructureOfMeals" />
+          <AssociationSet Name="FK_FOODS_REFERENCE_FOODCATE" Association="Self.FK_FOODS_REFERENCE_FOODCATE">
+            <End Role="FoodCategory" EntitySet="FoodCategory" />
+            <End Role="Foods" EntitySet="Foods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FOODNUTR_REFERENCE_FOODS" Association="Self.FK_FOODNUTR_REFERENCE_FOODS">
+            <End Role="Foods" EntitySet="Foods" />
+            <End Role="FoodNutritions" EntitySet="FoodNutritions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVESTIG_REFERENCE_INVESTIG" Association="Self.FK_INVESTIG_REFERENCE_INVESTIG">
+            <End Role="InvestigationRecord" EntitySet="InvestigationRecord" />
+            <End Role="InvestigationAnswer" EntitySet="InvestigationAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NUTRTIVE_REFERENCE_INVESTIG" Association="Self.FK_NUTRTIVE_REFERENCE_INVESTIG">
+            <End Role="InvestigationRecord" EntitySet="InvestigationRecord" />
+            <End Role="NutrtiveElementIntakeStatistics" EntitySet="NutrtiveElementIntakeStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STRUCTUR_REFERENCE_INVESTIG" Association="Self.FK_STRUCTUR_REFERENCE_INVESTIG">
+            <End Role="InvestigationRecord" EntitySet="InvestigationRecord" />
+            <End Role="StructureOfMeals" EntitySet="StructureOfMeals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENC_REFERENCE_QUESTION" Association="Self.FK_REFERENC_REFERENCE_QUESTION">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="ReferenceDiagram" EntitySet="ReferenceDiagram" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NutritionalResearchDatabaseModelStoreContainer" CdmEntityContainer="NutritionalResearchDatabaseEntities">
+          <EntitySetMapping Name="FoodCategory">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.FoodCategory">
+              <MappingFragment StoreEntitySet="FoodCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstCategoryCode" ColumnName="FirstCategoryCode" />
+                <ScalarProperty Name="FirstCategoryName" ColumnName="FirstCategoryName" />
+                <ScalarProperty Name="SecondCategoryCode" ColumnName="SecondCategoryCode" />
+                <ScalarProperty Name="SecondCategoryName" ColumnName="SecondCategoryName" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="FoodUnit" ColumnName="FoodUnit" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatisticsCategoryCode" ColumnName="StatisticsCategoryCode" />
+                <ScalarProperty Name="StatisticsCategoryName" ColumnName="StatisticsCategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodNutritions">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.FoodNutritions">
+              <MappingFragment StoreEntitySet="FoodNutritions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FoodId" ColumnName="FoodId" />
+                <ScalarProperty Name="NutritiveElementId" ColumnName="NutritiveElementId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Foods">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.Foods">
+              <MappingFragment StoreEntitySet="Foods">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="TypicalFood" ColumnName="TypicalFood" />
+                <ScalarProperty Name="FoodsDescription" ColumnName="FoodsDescription" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Proportion" ColumnName="Proportion" />
+                <ScalarProperty Name="Edible" ColumnName="Edible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvestigationAnswer">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.InvestigationAnswer">
+              <MappingFragment StoreEntitySet="InvestigationAnswer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InvestigationRecordId" ColumnName="InvestigationRecordId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="QuestionType" ColumnName="QuestionType" />
+                <ScalarProperty Name="AnswerType" ColumnName="AnswerType" />
+                <ScalarProperty Name="AnswerValue1" ColumnName="AnswerValue1" />
+                <ScalarProperty Name="AnswerValue2" ColumnName="AnswerValue2" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="UpdationTime" ColumnName="UpdationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvestigationRecord">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.InvestigationRecord">
+              <MappingFragment StoreEntitySet="InvestigationRecord">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QueueId" ColumnName="QueueId" />
+                <ScalarProperty Name="HealthBookId" ColumnName="HealthBookId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Week" ColumnName="Week" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="BeforeWeight" ColumnName="BeforeWeight" />
+                <ScalarProperty Name="BeforeBMI" ColumnName="BeforeBMI" />
+                <ScalarProperty Name="CurrentWeight" ColumnName="CurrentWeight" />
+                <ScalarProperty Name="InvestigatorName" ColumnName="InvestigatorName" />
+                <ScalarProperty Name="AuditorName" ColumnName="AuditorName" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="UpdatetionTime" ColumnName="UpdatetionTime" />
+                <ScalarProperty Name="AuditTime" ColumnName="AuditTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NuritiveElement">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.NuritiveElement">
+              <MappingFragment StoreEntitySet="NuritiveElement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChineseName" ColumnName="ChineseName" />
+                <ScalarProperty Name="EnglishName" ColumnName="EnglishName" />
+                <ScalarProperty Name="ChineseUnit" ColumnName="ChineseUnit" />
+                <ScalarProperty Name="EnglishUnit" ColumnName="EnglishUnit" />
+                <ScalarProperty Name="Stage1StandardValue" ColumnName="Stage1StandardValue" />
+                <ScalarProperty Name="Stage2StandardValue" ColumnName="Stage2StandardValue" />
+                <ScalarProperty Name="Stage3StandardValue" ColumnName="Stage3StandardValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NutrtiveElementIntakeStatistics">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.NutrtiveElementIntakeStatistics">
+              <MappingFragment StoreEntitySet="NutrtiveElementIntakeStatistics">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="NutritiveElementId" ColumnName="NutritiveElementId" />
+                <ScalarProperty Name="IntakeValue" ColumnName="IntakeValue" />
+                <ScalarProperty Name="RNI_AIValue" ColumnName="RNI_AIValue" />
+                <ScalarProperty Name="RNIRatio" ColumnName="RNIRatio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferenceDiagram">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.ReferenceDiagram">
+              <MappingFragment StoreEntitySet="ReferenceDiagram">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="IconPath" ColumnName="IconPath" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StructureOfMeals">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.StructureOfMeals">
+              <MappingFragment StoreEntitySet="StructureOfMeals">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="FoodCategoryId" ColumnName="FoodCategoryId" />
+                <ScalarProperty Name="Intake" ColumnName="Intake" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="UpdationTime" ColumnName="UpdationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

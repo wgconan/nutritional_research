@@ -11,6 +11,7 @@
     <AssemblyName>NutritionalResearchBusiness</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,7 +24,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -67,15 +67,79 @@
   <ItemGroup>
     <Compile Include="BLL\NRDataService.cs" />
     <Compile Include="BLL\NRMainService.cs" />
+    <Compile Include="DAL\FoodCategory.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\FoodNutritions.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Foods.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\InvestigationAnswer.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\InvestigationRecord.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NRModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NRModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NRModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NRModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NRModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NuritiveElement.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NutrtiveElementIntakeStatistics.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Question.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ReferenceDiagram.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\StructureOfMeals.cs">
+      <DependentUpon>NRModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="INRDataService.cs" />
     <Compile Include="INRMainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="DAL\NRModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NRModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL\NRModel.edmx.diagram">
+      <DependentUpon>NRModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DAL\NRModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NRModel.edmx</DependentUpon>
+      <LastGenOutput>NRModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\NRModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NRModel.edmx</DependentUpon>
+      <LastGenOutput>NRModel.cs</LastGenOutput>
+    </Content>
     <Content Include="DB\NutritionalResearchDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -102,9 +166,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAL\" />
     <Folder Include="Dtos\" />
     <Folder Include="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
