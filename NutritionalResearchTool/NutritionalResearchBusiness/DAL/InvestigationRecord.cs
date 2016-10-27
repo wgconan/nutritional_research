@@ -24,7 +24,7 @@ namespace NutritionalResearchBusiness.DAL
     
         public System.Guid Id { get; set; }
         public string QueueId { get; set; }
-        public byte[] HealthBookId { get; set; }
+        public string HealthBookId { get; set; }
         public string Name { get; set; }
         public System.DateTime Birthday { get; set; }
         public int Week { get; set; }

@@ -29,11 +29,11 @@ namespace NutritionalResearchBusiness.DAL
         public virtual DbSet<FoodNutritions> FoodNutritions { get; set; }
         public virtual DbSet<Foods> Foods { get; set; }
         public virtual DbSet<InvestigationAnswer> InvestigationAnswer { get; set; }
-        public virtual DbSet<InvestigationRecord> InvestigationRecord { get; set; }
         public virtual DbSet<NuritiveElement> NuritiveElement { get; set; }
         public virtual DbSet<NutrtiveElementIntakeStatistics> NutrtiveElementIntakeStatistics { get; set; }
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<ReferenceDiagram> ReferenceDiagram { get; set; }
         public virtual DbSet<StructureOfMeals> StructureOfMeals { get; set; }
+        public virtual DbSet<InvestigationRecord> InvestigationRecord { get; set; }
     }
 }

@@ -112,6 +112,8 @@
     <Compile Include="DAL\StructureOfMeals.cs">
       <DependentUpon>NRModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dtos\NewInvestigationRecord.cs" />
+    <Compile Include="Enums\SystemEnums.cs" />
     <Compile Include="INRDataService.cs" />
     <Compile Include="INRMainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,10 +167,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
