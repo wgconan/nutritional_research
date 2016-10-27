@@ -104,6 +104,12 @@
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NutritionalResearchBusiness\NutritionalResearchBusiness.csproj">
+      <Project>{66a70464-fdfd-4a34-84f5-cbd73107bc26}</Project>
+      <Name>NutritionalResearchBusiness</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
