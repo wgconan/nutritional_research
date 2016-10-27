@@ -12,25 +12,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using NutritionalResearchToolApplication.Pages;
-using System.Windows.Navigation;
-
 namespace NutritionalResearchToolApplication
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// Page1.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Page1 : Page
     {
-        public MainWindow()
+        public Page1()
         {
             InitializeComponent();
-        }
-
-        private void mainWindows_Loaded(object sender, RoutedEventArgs e)
-        {
-            fram1.Source = new Uri(@"Pages\MainPage.xaml", UriKind.Relative);
-            fram1.Navigate(new Uri(@"Pages\MainPage.xaml", UriKind.Relative));
         }
     }
 }
