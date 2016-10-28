@@ -47,5 +47,10 @@ namespace NutritionalResearchBusiness
         /// <param name="recordId"></param>
         /// <param name="AuditorName"></param>
         void AuditSomeoneInvestigationRecord(Guid recordId, string AuditorName);
+        /// <summary>
+        /// 重新生成统计报告（用于修改未审核记录问题答案后使用）
+        /// </summary>
+        /// <param name="recordId">记录Id</param>
+        void ReGenerateReport(Guid recordId);
     }
 }

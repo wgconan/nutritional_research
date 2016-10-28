@@ -432,5 +432,29 @@ namespace NutritionalResearchBusiness.BLL
                 return 0;
             }
         }
+
+        public void ReGenerateReport(Guid recordId)
+        {
+            using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
+            {
+                var record = mydb.InvestigationRecord.Where(nObj => nObj.Id == recordId).SingleOrDefault();
+                if (record == null)
+                {
+                    throw new ArgumentException("无效记录Id");
+                }
+                if ((InvestigationRecordStateType)record.State == InvestigationRecordStateType.FinishedAndAudited)
+                {
+                    throw new InvalidOperationException("该记录已审核，不能重新生成报告");
+                }
+                try
+                {
+                    GenerateOrUpdateReport(record, mydb);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
     }
 }
