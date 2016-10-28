@@ -20,6 +20,8 @@ namespace NutritionalResearchBusiness.DAL
         public double IntakeValue { get; set; }
         public Nullable<double> RNI_AIValue { get; set; }
         public Nullable<double> RNIRatio { get; set; }
+        public System.DateTime CreationTime { get; set; }
+        public Nullable<System.DateTime> UpdationTime { get; set; }
     
         public virtual InvestigationRecord InvestigationRecord { get; set; }
     }

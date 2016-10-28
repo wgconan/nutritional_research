@@ -55,6 +55,7 @@
           <Property Name="AnswerValue2" Type="float" />
           <Property Name="CreationTime" Type="datetime" Nullable="false" />
           <Property Name="UpdationTime" Type="datetime" />
+          <Property Name="QuestionSerialNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="InvestigationRecord">
           <Key>
@@ -90,6 +91,7 @@
           <Property Name="Stage1StandardValue" Type="float" />
           <Property Name="Stage2StandardValue" Type="float" />
           <Property Name="Stage3StandardValue" Type="float" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="NutrtiveElementIntakeStatistics">
           <Key>
@@ -101,6 +103,8 @@
           <Property Name="IntakeValue" Type="float" Nullable="false" />
           <Property Name="RNI_AIValue" Type="float" />
           <Property Name="RNIRatio" Type="float" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdationTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -111,6 +115,7 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Sort" Type="int" Nullable="false" />
           <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="ReferenceDiagram">
           <Key>
@@ -128,10 +133,12 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RecordId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FoodCategoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StructureDescription" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Intake" Type="float" Nullable="false" />
           <Property Name="CreationTime" Type="datetime" Nullable="false" />
-          <Property Name="UpdationTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdationTime" Type="datetime" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="StructureCode" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <Association Name="FK_FOODNUTR_REFERENCE_FOODS">
           <End Role="Foods" Type="Self.Foods" Multiplicity="1" />
@@ -300,6 +307,7 @@
           <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdationTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="InvestigationRecord" Relationship="NutritionalResearchDatabaseModel.FK_INVESTIG_REFERENCE_INVESTIG" FromRole="InvestigationAnswer" ToRole="InvestigationRecord" />
+          <Property Name="QuestionSerialNumber" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="NuritiveElement">
           <Key>
@@ -313,6 +321,7 @@
           <Property Name="Stage1StandardValue" Type="Double" />
           <Property Name="Stage2StandardValue" Type="Double" />
           <Property Name="Stage3StandardValue" Type="Double" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="NutrtiveElementIntakeStatistics">
           <Key>
@@ -325,6 +334,8 @@
           <Property Name="RNI_AIValue" Type="Double" />
           <Property Name="RNIRatio" Type="Double" />
           <NavigationProperty Name="InvestigationRecord" Relationship="NutritionalResearchDatabaseModel.FK_NUTRTIVE_REFERENCE_INVESTIG" FromRole="NutrtiveElementIntakeStatistics" ToRole="InvestigationRecord" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdationTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -336,6 +347,7 @@
           <Property Name="Sort" Type="Int32" Nullable="false" />
           <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="ReferenceDiagram" Relationship="Self.FK_REFERENC_REFERENCE_QUESTION" FromRole="Question" ToRole="ReferenceDiagram" />
+          <Property Name="CategoryId" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="ReferenceDiagram">
           <Key>
@@ -347,18 +359,6 @@
           <Property Name="IconPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Sort" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Question" Relationship="Self.FK_REFERENC_REFERENCE_QUESTION" FromRole="ReferenceDiagram" ToRole="Question" />
-        </EntityType>
-        <EntityType Name="StructureOfMeals">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="RecordId" Type="Guid" Nullable="false" />
-          <Property Name="FoodCategoryId" Type="Guid" Nullable="false" />
-          <Property Name="Intake" Type="Double" Nullable="false" />
-          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UpdationTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="InvestigationRecord" Relationship="NutritionalResearchDatabaseModel.FK_STRUCTUR_REFERENCE_INVESTIG" FromRole="StructureOfMeals" ToRole="InvestigationRecord" />
         </EntityType>
         <Association Name="FK_FOODS_REFERENCE_FOODCATE">
           <End Role="FoodCategory" Type="Self.FoodCategory" Multiplicity="1" />
@@ -405,7 +405,6 @@
           <EntitySet Name="NutrtiveElementIntakeStatistics" EntityType="Self.NutrtiveElementIntakeStatistics" />
           <EntitySet Name="Question" EntityType="Self.Question" />
           <EntitySet Name="ReferenceDiagram" EntityType="Self.ReferenceDiagram" />
-          <EntitySet Name="StructureOfMeals" EntityType="Self.StructureOfMeals" />
           <AssociationSet Name="FK_FOODS_REFERENCE_FOODCATE" Association="Self.FK_FOODS_REFERENCE_FOODCATE">
             <End Role="FoodCategory" EntitySet="FoodCategory" />
             <End Role="Foods" EntitySet="Foods" />
@@ -427,6 +426,7 @@
             <End Role="InvestigationRecord" EntitySet="InvestigationRecord" />
             <End Role="NutrtiveElementIntakeStatistics" EntitySet="NutrtiveElementIntakeStatistics" />
           </AssociationSet>
+          <EntitySet Name="StructureOfMeals" EntityType="NutritionalResearchDatabaseModel.StructureOfMeals" />
           <AssociationSet Name="FK_STRUCTUR_REFERENCE_INVESTIG" Association="NutritionalResearchDatabaseModel.FK_STRUCTUR_REFERENCE_INVESTIG">
             <End Role="InvestigationRecord" EntitySet="InvestigationRecord" />
             <End Role="StructureOfMeals" EntitySet="StructureOfMeals" />
@@ -481,6 +481,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="StructureOfMeals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RecordId" Type="Guid" Nullable="false" />
+          <Property Name="StructureDescription" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Intake" Type="Double" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdationTime" Type="DateTime" Precision="3" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="StructureCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="InvestigationRecord" Relationship="NutritionalResearchDatabaseModel.FK_STRUCTUR_REFERENCE_INVESTIG" FromRole="StructureOfMeals" ToRole="InvestigationRecord" />
+        </EntityType>
         <Association Name="FK_STRUCTUR_REFERENCE_INVESTIG">
           <End Type="NutritionalResearchDatabaseModel.InvestigationRecord" Role="InvestigationRecord" Multiplicity="1" />
           <End Type="NutritionalResearchDatabaseModel.StructureOfMeals" Role="StructureOfMeals" Multiplicity="*" />
@@ -542,6 +556,7 @@
           <EntitySetMapping Name="InvestigationAnswer">
             <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.InvestigationAnswer">
               <MappingFragment StoreEntitySet="InvestigationAnswer">
+                <ScalarProperty Name="QuestionSerialNumber" ColumnName="QuestionSerialNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InvestigationRecordId" ColumnName="InvestigationRecordId" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
@@ -557,6 +572,7 @@
           <EntitySetMapping Name="NuritiveElement">
             <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.NuritiveElement">
               <MappingFragment StoreEntitySet="NuritiveElement">
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ChineseName" ColumnName="ChineseName" />
                 <ScalarProperty Name="EnglishName" ColumnName="EnglishName" />
@@ -571,6 +587,8 @@
           <EntitySetMapping Name="NutrtiveElementIntakeStatistics">
             <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.NutrtiveElementIntakeStatistics">
               <MappingFragment StoreEntitySet="NutrtiveElementIntakeStatistics">
+                <ScalarProperty Name="UpdationTime" ColumnName="UpdationTime" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="RecordId" ColumnName="RecordId" />
                 <ScalarProperty Name="NutritiveElementId" ColumnName="NutritiveElementId" />
@@ -583,6 +601,7 @@
           <EntitySetMapping Name="Question">
             <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.Question">
               <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -599,18 +618,6 @@
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="IconPath" ColumnName="IconPath" />
                 <ScalarProperty Name="Sort" ColumnName="Sort" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StructureOfMeals">
-            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.StructureOfMeals">
-              <MappingFragment StoreEntitySet="StructureOfMeals">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
-                <ScalarProperty Name="FoodCategoryId" ColumnName="FoodCategoryId" />
-                <ScalarProperty Name="Intake" ColumnName="Intake" />
-                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
-                <ScalarProperty Name="UpdationTime" ColumnName="UpdationTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -633,6 +640,20 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="HealthBookId" ColumnName="HealthBookId" />
                 <ScalarProperty Name="QueueId" ColumnName="QueueId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StructureOfMeals">
+            <EntityTypeMapping TypeName="NutritionalResearchDatabaseModel.StructureOfMeals">
+              <MappingFragment StoreEntitySet="StructureOfMeals">
+                <ScalarProperty Name="StructureCode" ColumnName="StructureCode" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="UpdationTime" ColumnName="UpdationTime" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Intake" ColumnName="Intake" />
+                <ScalarProperty Name="StructureDescription" ColumnName="StructureDescription" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

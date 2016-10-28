@@ -25,6 +25,7 @@ namespace NutritionalResearchBusiness.DAL
         public int Type { get; set; }
         public int Sort { get; set; }
         public System.DateTime CreationTime { get; set; }
+        public System.Guid CategoryId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReferenceDiagram> ReferenceDiagram { get; set; }

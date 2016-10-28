@@ -16,10 +16,12 @@ namespace NutritionalResearchBusiness.DAL
     {
         public System.Guid Id { get; set; }
         public System.Guid RecordId { get; set; }
-        public System.Guid FoodCategoryId { get; set; }
+        public string StructureDescription { get; set; }
         public double Intake { get; set; }
         public System.DateTime CreationTime { get; set; }
-        public System.DateTime UpdationTime { get; set; }
+        public Nullable<System.DateTime> UpdationTime { get; set; }
+        public string Unit { get; set; }
+        public string StructureCode { get; set; }
     
         public virtual InvestigationRecord InvestigationRecord { get; set; }
     }

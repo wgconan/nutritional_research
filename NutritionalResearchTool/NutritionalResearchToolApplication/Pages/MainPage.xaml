@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:NutritionalResearchToolApplication.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="305" d:DesignWidth="585"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="MainPage">
 
     <Grid Margin="0,0,-290,0">
@@ -19,17 +19,26 @@
         <Label x:Name="label_Copy6" Content="身高" HorizontalAlignment="Left" Margin="105,164,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy7" Content="孕前体重" HorizontalAlignment="Left" Margin="252,164,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy8" Content="当前体重" HorizontalAlignment="Left" Margin="415,164,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxQueueID" HorizontalAlignment="Left" Height="23" Margin="105,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxHealthbookID" HorizontalAlignment="Left" Height="23" Margin="252,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxInvestigatorName" HorizontalAlignment="Left" Height="23" Margin="415,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="105,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxBirthday" HorizontalAlignment="Left" Height="23" Margin="252,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxWeek" HorizontalAlignment="Left" Height="23" Margin="415,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Height="23" Margin="105,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxBeforeWeight" HorizontalAlignment="Left" Height="23" Margin="252,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxCurrentWeight" HorizontalAlignment="Left" Height="23" Margin="415,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
+        <TextBox x:Name="textBoxQueueID" HorizontalAlignment="Left" Height="23" Margin="105,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBoxHealthbookID" HorizontalAlignment="Left" Height="23" Margin="252,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBoxInvestigatorName" HorizontalAlignment="Left" Height="23" Margin="415,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="105,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBoxBirthday" HorizontalAlignment="Left" Height="23" Margin="252,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBoxWeek" HorizontalAlignment="Left" Height="23" Margin="415,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Height="23" Margin="105,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBoxBeforeWeight" HorizontalAlignment="Left" Height="23" Margin="252,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBoxCurrentWeight" HorizontalAlignment="Left" Height="23" Margin="415,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
         <Button x:Name="buttonBegin" Content="开始测试" HorizontalAlignment="Left" Margin="453,260,0,0" VerticalAlignment="Top" Width="75" Click="buttonBegin_Click"/>
-        <Label x:Name="labelRecordsCount" Content="填表份数" HorizontalAlignment="Left" Margin="17,229,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelRecordsCount" Content="填表份数" HorizontalAlignment="Left" Margin="17,229,0,0" VerticalAlignment="Top" Loaded="labelRecordsCount_Loaded"/>
         <Button x:Name="buttonViewRecords" Content="点击查看记录" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" Width="75" Click="buttonViewRecords_Click" />
+        <TextBlock x:Name="textBlock_Required1" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="182,69,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+        <TextBlock x:Name="textBlock_Required2" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="329,69,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+        <TextBlock x:Name="textBlock_Required3" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="492,69,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+        <TextBlock x:Name="textBlock_Required4" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="181,133,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+        <TextBlock x:Name="textBlock_Required5" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="329,134,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+        <TextBlock x:Name="textBlock_Required6" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="492,135,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+        <TextBlock x:Name="textBlock_Required7" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="182,199,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+        <TextBlock x:Name="textBlock_Required8" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="329,200,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+        <TextBlock x:Name="textBlock_Required9" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="492,200,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
     </Grid>
 </Page>

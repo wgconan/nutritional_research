@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NutritionalResearchBusiness.Enums;
 
 namespace NutritionalResearchBusiness.Dtos
 {
     /// <summary>
-    /// 新的调查记录
+    /// 调查记录列表视图Dto
     /// </summary>
-    public class NewInvestigationRecord
+    public class InvestigationRecordViewDto
     {
+        public Guid Id { get; set; }
         /// <summary>
         /// 队列编号
         /// </summary>
-        public string QueneId { get; set; }
+        public string QueueId { get; set; }
         /// <summary>
         /// 围产保健手册编号
         /// </summary>
@@ -43,8 +45,28 @@ namespace NutritionalResearchBusiness.Dtos
         /// </summary>
         public double CurrentWeight { get; set; }
         /// <summary>
+        /// 孕前BMI
+        /// </summary>
+        public double BeforeBMI { get; set; }
+        /// <summary>
         /// 调查者姓名
         /// </summary>
         public string InvestigatorName { get; set; }
+        /// <summary>
+        /// 调查时间
+        /// </summary>
+        public DateTime InvestionTime { get; set; }
+        /// <summary>
+        /// 调查状态
+        /// </summary>
+        public InvestigationRecordStateType State { get; set; }
+        /// <summary>
+        /// 审核者名字
+        /// </summary>
+        public string AuditorName { get; set; }
+        /// <summary>
+        /// 最后完成的问题序号
+        /// </summary>
+        public int LastFinishQuestionSN { get; set; }
     }
 }

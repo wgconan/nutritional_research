@@ -23,6 +23,7 @@ namespace NutritionalResearchBusiness.DAL
         public Nullable<double> AnswerValue2 { get; set; }
         public System.DateTime CreationTime { get; set; }
         public Nullable<System.DateTime> UpdationTime { get; set; }
+        public int QuestionSerialNumber { get; set; }
     
         public virtual InvestigationRecord InvestigationRecord { get; set; }
     }

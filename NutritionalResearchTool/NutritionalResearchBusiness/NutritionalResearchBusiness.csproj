@@ -65,8 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\NRDataService.cs" />
+    <Compile Include="BLL\NRDataProcessService.cs" />
     <Compile Include="BLL\NRMainService.cs" />
+    <Compile Include="Common\PageComputer.cs" />
     <Compile Include="DAL\FoodCategory.cs">
       <DependentUpon>NRModel.tt</DependentUpon>
     </Compile>
@@ -112,9 +113,16 @@
     <Compile Include="DAL\StructureOfMeals.cs">
       <DependentUpon>NRModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Dtos\NewInvestigationRecord.cs" />
+    <Compile Include="Dtos\AboutPageQuery.cs" />
+    <Compile Include="Dtos\InvestigationAnswerInputDto.cs" />
+    <Compile Include="Dtos\InvestigationRecordListViewDto.cs" />
+    <Compile Include="Dtos\InvestigationRecordQueryConditions.cs" />
+    <Compile Include="Dtos\NewInvestigationRecordDto.cs" />
+    <Compile Include="Dtos\QuestionViewDto.cs" />
+    <Compile Include="Dtos\ReferenceDiagramDto.cs" />
     <Compile Include="Enums\SystemEnums.cs" />
-    <Compile Include="INRDataService.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="INRDataProcessService.cs" />
     <Compile Include="INRMainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,11 +151,10 @@
       <LastGenOutput>NRModel.cs</LastGenOutput>
     </Content>
     <Content Include="DB\NutritionalResearchDatabase.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="DB\NutritionalResearchDatabase_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>NutritionalResearchDatabase.mdf</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

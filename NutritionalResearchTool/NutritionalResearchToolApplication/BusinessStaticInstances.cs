@@ -10,12 +10,12 @@ namespace NutritionalResearchToolApplication
 {
     public static class BusinessStaticInstances
     {
-        private static INRDataService NRDataServiceInstance = null;
+        private static INRDataProcessService NRDataProcessServiceInstance = null;
         private static INRMainService NRMainServiceInstance=null;
 
-        public static INRDataService GetSingleDataServiceInstance()
+        public static INRDataProcessService GetSingleDataProcessServiceInstance()
         {
-            return (NRDataServiceInstance != null) ? NRDataServiceInstance : new NRDataService();
+            return (NRDataProcessServiceInstance != null) ? NRDataProcessServiceInstance : new NRDataProcessService();
         }
         public static INRMainService GetSingleMainServiceInstance()
         {

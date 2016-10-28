@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NutritionalResearchBusiness
 {
-    public interface INRDataService
+    public interface INRDataProcessService
     {
     }
 }

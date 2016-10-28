@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NutritionalResearchToolApplication"
         mc:Ignorable="d"
         Name="mainWindows"
-        Title="MainWindow" Height="350" Width="585" Loaded="mainWindows_Loaded">
+        Title="MainWindow" Height="600" Width="800" Loaded="mainWindows_Loaded">
     <Grid Margin="0,0,-290,0">
         <Frame x:Name="fram1" />
         <!--<Label x:Name="label_Copy" Content="调查者" HorizontalAlignment="Left" Margin="415,34,0,0" VerticalAlignment="Top"/>

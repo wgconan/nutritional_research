@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NutritionalResearchBusiness.BLL
 {
-    public class NRDataService:INRDataService
+    public class NRDataProcessService:INRDataProcessService
     {
     }
 }

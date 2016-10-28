@@ -22,5 +22,6 @@ namespace NutritionalResearchBusiness.DAL
         public Nullable<double> Stage1StandardValue { get; set; }
         public Nullable<double> Stage2StandardValue { get; set; }
         public Nullable<double> Stage3StandardValue { get; set; }
+        public bool IsVisible { get; set; }
     }
 }

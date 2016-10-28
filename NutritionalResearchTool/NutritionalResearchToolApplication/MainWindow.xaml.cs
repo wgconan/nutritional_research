@@ -13,7 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using NutritionalResearchToolApplication.Pages;
-using System.Windows.Navigation;
 
 namespace NutritionalResearchToolApplication
 {
@@ -29,8 +28,9 @@ namespace NutritionalResearchToolApplication
 
         private void mainWindows_Loaded(object sender, RoutedEventArgs e)
         {
-            fram1.Source = new Uri(@"Pages\MainPage.xaml", UriKind.Relative);
-            fram1.Navigate(new Uri(@"Pages\MainPage.xaml", UriKind.Relative));
+            //fram1.Source = new Uri(@"Pages\MainPage.xaml", UriKind.Relative);
+            //fram1.Navigate(new Uri(@"Pages\MainPage.xaml", UriKind.Relative));
+            mainWindows.Content = new MainPage();
         }
     }
 }
