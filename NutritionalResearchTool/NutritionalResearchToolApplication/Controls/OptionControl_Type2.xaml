@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NutritionalResearchToolApplication.Controls"
              mc:Ignorable="d" 
-             Height="340" Width="1024" Name="OptionType2">
+             Height="340" Width="1024" Name="OptionType2" Loaded="OptionType2_Loaded">
     <UserControl.Resources>
         <Style x:Key="RadioButtonOptionStyle" TargetType="{x:Type RadioButton}">
             <Setter Property="FocusVisualStyle">
@@ -94,9 +94,9 @@
                 <RadioButton Name="rb_Option_Yes" Content="吃过" FontSize="18" IsChecked="True" VerticalAlignment="Center" Margin="3,15" Foreground="#FF8D8776" BorderBrush="#FF8D8776" Style="{DynamicResource RadioButtonOptionStyle}"/>
                 <RadioButton Name="rb_Option_No" Content="没吃过" FontSize="18" VerticalAlignment="Center" Foreground="#FF8D8776" BorderBrush="#FF8D8776" Style="{DynamicResource RadioButtonOptionStyle}" Margin="3,15"/>
             </StackPanel>
-            <TextBox Name="tb_OptionN" Width="35" Height="22" FontSize="16" Foreground="#FF8D8776" Margin="3,15" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="10" />
-            <TextBlock Text="次 " Foreground="#FF8D8776" FontSize="18" VerticalAlignment="Top" Margin="3,15"/>
+            <TextBox Name="tb_OptionN" Width="35" Height="22" FontSize="16" Foreground="#FF8D8776" Margin="3,15" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1" />
+            <TextBlock Name="textblock_unit" Text="次 " Foreground="#FF8D8776" FontSize="18" VerticalAlignment="Top" Margin="3,15"/>
         </StackPanel>
-        <Button Name="btn_Next" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="110" Content="下一问" Background="#FFF95172" Foreground="White" FontSize="16" BorderThickness="0"/>
+        <Button Name="btn_Next" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="110" Content="下一问" Background="#FFF95172" Foreground="White" FontSize="16" BorderThickness="0" Click="btn_Next_Click"/>
     </Grid>
 </UserControl>

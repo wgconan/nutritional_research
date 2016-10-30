@@ -162,7 +162,8 @@ namespace NutritionalResearchBusiness.BLL
                 {
                     throw new InvalidOperationException("该记录已完成，不能重复操作");
                 }
-                GenerateOrUpdateReport(record, mydb);
+                //由于初始数据还未导入完整，现为方便调试，暂时屏蔽完成记录就生成报告的逻辑
+                //GenerateOrUpdateReport(record, mydb);
                 record.State = (int)InvestigationRecordStateType.FinishedAndNoAudit;
                 try
                 {

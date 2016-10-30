@@ -68,7 +68,8 @@ namespace NutritionalResearchToolApplication.Pages
                         textblock_SecondCategory.Foreground = new SolidColorBrush(Color.FromRgb(249, 81, 114));
                         textblock_QuestionDescription.Foreground = new SolidColorBrush(Color.FromRgb(249, 81, 114));
                         pb_QuestionProcess.Foreground = new SolidColorBrush(Color.FromRgb(249, 81, 114));
-                        var control2 = new OptionControl_Type2();
+                        var control2 = new OptionControl_Type2(questionObj);
+                        control2.FinishedInputEvent += Control_FinishedInputEvent;
                         grid_Options.Children.Add(control2);
                         break;
                     case QuestionType.Choice:
@@ -76,7 +77,8 @@ namespace NutritionalResearchToolApplication.Pages
                         textblock_SecondCategory.Foreground = new SolidColorBrush(Color.FromRgb(249, 81, 114));
                         textblock_QuestionDescription.Foreground = new SolidColorBrush(Color.FromRgb(249, 81, 114));
                         pb_QuestionProcess.Foreground = new SolidColorBrush(Color.FromRgb(249, 81, 114));
-                        var control3 = new OptionControl_Type3();
+                        var control3 = new OptionControl_Type3(questionObj);
+                        control3.FinishedInputEvent += Control_FinishedInputEvent;
                         grid_Options.Children.Add(control3);
                         break;
                     default:
@@ -101,24 +103,37 @@ namespace NutritionalResearchToolApplication.Pages
                     case QuestionType.Standard:
                         OptionControl_Type1 control1 = grid_Options.Children[0] as OptionControl_Type1;
                         control1.FinishedInputEvent -= Control_FinishedInputEvent;
-                        grid_Options.Children.Clear();
                         break;
                     case QuestionType.Optional:
+                        OptionControl_Type2 control2 = grid_Options.Children[0] as OptionControl_Type2;
+                        control2.FinishedInputEvent -= Control_FinishedInputEvent;
                         break;
                     case QuestionType.Choice:
+                        OptionControl_Type3 control3 = grid_Options.Children[0] as OptionControl_Type3;
+                        control3.FinishedInputEvent -= Control_FinishedInputEvent;
                         break;
                     default:
                         ReturnMainPage();
                         return;
                 }
-                if(questionObj.CurrentProgress < 1)
+                grid_Options.Children.Clear();
+                if (questionObj.CurrentProgress < 1)
                 {
                     serialNumber++;
                     LoadQuestionInfo(serialNumber);
                 }
                 else
                 {
-                    //Todo FinishRecord
+                    INRMainService myMainService = BusinessStaticInstances.GetSingleMainServiceInstance();
+                    try
+                    {
+                        myMainService.FinishSomeoneInvestigationRecord(recordId);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("完成调查发送错误：" + ex.Message);
+                    }
+                    ReturnMainPage();
                 }
             }
             else

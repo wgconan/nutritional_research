@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NutritionalResearchToolApplication.Controls"
              mc:Ignorable="d" 
-             Height="340" Width="1024" Name="OptionType3">
+             Height="340" Width="1024" Name="OptionType3" Loaded="OptionType3_Loaded">
     <UserControl.Resources>
         <Style x:Key="RadioButtonOptionStyle" TargetType="{x:Type RadioButton}">
             <Setter Property="FocusVisualStyle">
@@ -94,6 +94,6 @@
             <RadioButton Name="rb_Option_B" Content="适中" FontSize="18" VerticalAlignment="Center" Foreground="#FF8D8776" BorderBrush="#FF8D8776" Style="{DynamicResource RadioButtonOptionStyle}" Margin="3,10"/>
             <RadioButton Name="rb_Option_C" Content="偏咸" FontSize="18" VerticalAlignment="Center" Foreground="#FF8D8776" BorderBrush="#FF8D8776" Style="{DynamicResource RadioButtonOptionStyle}" Margin="3,10"/>
         </StackPanel>
-        <Button Name="btn_Finish" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="110" Content="完  成" Background="#FFF95172" Foreground="White" FontSize="16" BorderThickness="0"/>
+        <Button Name="btn_Finish" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="28" Width="110" Content="完  成" Background="#FFF95172" Foreground="White" FontSize="16" BorderThickness="0" Click="btn_Finish_Click"/>
     </Grid>
 </UserControl>
