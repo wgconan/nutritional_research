@@ -18,12 +18,12 @@ namespace NutritionalResearchBusiness.DAL
         public System.Guid InvestigationRecordId { get; set; }
         public System.Guid QuestionId { get; set; }
         public int QuestionType { get; set; }
+        public int QuestionSerialNumber { get; set; }
         public int AnswerType { get; set; }
         public Nullable<int> AnswerValue1 { get; set; }
         public Nullable<double> AnswerValue2 { get; set; }
         public System.DateTime CreationTime { get; set; }
         public Nullable<System.DateTime> UpdationTime { get; set; }
-        public int QuestionSerialNumber { get; set; }
     
         public virtual InvestigationRecord InvestigationRecord { get; set; }
     }

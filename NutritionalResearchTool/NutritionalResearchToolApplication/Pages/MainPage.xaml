@@ -5,40 +5,76 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:NutritionalResearchToolApplication.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="800"
-      Title="MainPage">
-
-    <Grid Margin="0,0,-290,0">
-        <Label x:Name="label_Copy" Content="调查者" HorizontalAlignment="Left" Margin="415,34,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy1" Content="围产保健手册编码" HorizontalAlignment="Left" Margin="252,34,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy2" Content="队列编码" HorizontalAlignment="Left" Margin="105,34,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy3" Content="姓名" HorizontalAlignment="Left" Margin="105,98,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy4" Content="出生日期" HorizontalAlignment="Left" Margin="252,98,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy5" Content="孕周" HorizontalAlignment="Left" Margin="415,98,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy6" Content="身高" HorizontalAlignment="Left" Margin="105,164,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy7" Content="孕前体重" HorizontalAlignment="Left" Margin="252,164,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy8" Content="当前体重" HorizontalAlignment="Left" Margin="415,164,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxQueueID" HorizontalAlignment="Left" Height="23" Margin="105,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textBoxHealthbookID" HorizontalAlignment="Left" Height="23" Margin="252,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textBoxInvestigatorName" HorizontalAlignment="Left" Height="23" Margin="415,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="105,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textBoxBirthday" HorizontalAlignment="Left" Height="23" Margin="252,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textBoxWeek" HorizontalAlignment="Left" Height="23" Margin="415,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Height="23" Margin="105,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textBoxBeforeWeight" HorizontalAlignment="Left" Height="23" Margin="252,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textBoxCurrentWeight" HorizontalAlignment="Left" Height="23" Margin="415,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="textBox_TextChanged"/>
-        <Button x:Name="buttonBegin" Content="开始测试" HorizontalAlignment="Left" Margin="453,260,0,0" VerticalAlignment="Top" Width="75" Click="buttonBegin_Click"/>
-        <Label x:Name="labelRecordsCount" Content="填表份数" HorizontalAlignment="Left" Margin="17,229,0,0" VerticalAlignment="Top" Loaded="labelRecordsCount_Loaded"/>
-        <Button x:Name="buttonViewRecords" Content="点击查看记录" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" Width="75" Click="buttonViewRecords_Click" />
-        <TextBlock x:Name="textBlock_Required1" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="182,69,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
-        <TextBlock x:Name="textBlock_Required2" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="329,69,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
-        <TextBlock x:Name="textBlock_Required3" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="492,69,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
-        <TextBlock x:Name="textBlock_Required4" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="181,133,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
-        <TextBlock x:Name="textBlock_Required5" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="329,134,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
-        <TextBlock x:Name="textBlock_Required6" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="492,135,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
-        <TextBlock x:Name="textBlock_Required7" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="182,199,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
-        <TextBlock x:Name="textBlock_Required8" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="329,200,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
-        <TextBlock x:Name="textBlock_Required9" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="此项必填" VerticalAlignment="Top" Margin="492,200,0,0" Height="13" Width="51" Visibility="Hidden" Foreground="Red" />
+      Height="576" Width="1024"
+      Title="MainPage" Loaded="Page_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="292"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/NutritionalResearchToolApplication;component/Resources/Images/main_left.jpg"/>
+            </Grid.Background>
+            <StackPanel VerticalAlignment="Bottom" Margin="18,0,0,18">
+                <TextBlock Text="已填表数" Foreground="#FF2F2B28" FontSize="16" Margin="0,2" />
+                <Label x:Name="labelRecordsCount" Content="0 份" Foreground="#FF2F2B28" FontSize="16" HorizontalAlignment="Left" Margin="0,2" Loaded="labelRecordsCount_Loaded"/>
+                <Button x:Name="buttonViewRecords" Content="点击查看记录" Foreground="#FF2F2B28" FontSize="16"  HorizontalAlignment="Left" Margin="0,2" Width="100" Click="buttonViewRecords_Click" Background="{x:Null}" BorderThickness="0" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="40,0,20,0" VerticalAlignment="Center" >
+                <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                    <Label x:Name="label_Copy0" Content="队列编码" FontSize="16" Foreground="#FF706B59" Width="140" Margin="0,0,85,0"/>
+                    <Label x:Name="label_Copy1" Content="围产保健手册编码" FontSize="16" Width="140" Foreground="#FF706B59" Margin="0,0,85,0" />
+                    <Label x:Name="label_Copy2" Content="调查者" FontSize="16" Width="140" Foreground="#FF706B59" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,25">
+                    <TextBox x:Name="textBoxQueueID" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required1" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                    <TextBox x:Name="textBoxHealthbookID" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required2" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                    <TextBox x:Name="textBoxInvestigatorName" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required3" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                    <Label x:Name="label_Copy3" Content="姓名" FontSize="16" Foreground="#FF706B59" Width="140" Margin="0,0,85,0" />
+                    <Label x:Name="label_Copy4" Content="出生日期" FontSize="16" Foreground="#FF706B59" Width="140" Margin="0,0,85,0"/>
+                    <Label x:Name="label_Copy5" Content="孕周" FontSize="16" Foreground="#FF706B59" Width="140" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,25">
+                    <TextBox x:Name="textBoxName" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required4" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                    <TextBox x:Name="textBoxBirthday" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required5" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                    <TextBox x:Name="textBoxWeek" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required6" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                    <Label x:Name="label_Copy6" Content="身高(单位cm)" FontSize="16" Foreground="#FF706B59" Width="140" Margin="0,0,85,0" />
+                    <Label x:Name="label_Copy7" Content="孕前体重(单位kg)" FontSize="16" Foreground="#FF706B59" Width="140" Margin="0,0,85,0" />
+                    <Label x:Name="label_Copy8" Content="当前体重(单位kg)" FontSize="16" Foreground="#FF706B59" Width="140" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBox x:Name="textBoxHeight" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required7" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                    <TextBox x:Name="textBoxBeforeWeight" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required8" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                    <TextBox x:Name="textBoxCurrentWeight" Height="30" TextWrapping="NoWrap" Width="140" TextChanged="textBox_TextChanged" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"/>
+                    <TextBlock x:Name="textBlock_Required9" TextWrapping="NoWrap" Text="此项必填" Height="20" Width="60" Visibility="Hidden" Foreground="Red" FontSize="14" Margin="0,0,25,0"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,90,0">
+                <StackPanel Margin="0,0,10,0">
+                    <TextBlock Text="请您仔细回忆一下您近4周的饮食情况" Foreground="#FF706B59" HorizontalAlignment="Right" Margin="0,3" FontSize="11" FontFamily="Microsoft YaHei UI Light"/>
+                    <TextBlock Text="请您尽量准确填写下列食物的食用频率并估计平均每次的食用量" Foreground="#FF706B59" HorizontalAlignment="Right" Margin="0,3" FontSize="11" FontFamily="Microsoft YaHei UI Light"/>
+                </StackPanel>
+                <Button x:Name="buttonBegin" Content="开始测试" FontSize="16" Width="110" Height="35" Click="buttonBegin_Click" BorderThickness="0" Background="#FFF6462E" Foreground="White" Margin="10,0" FontFamily="Microsoft YaHei UI Light"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

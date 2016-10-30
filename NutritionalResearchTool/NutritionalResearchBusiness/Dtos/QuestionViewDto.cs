@@ -28,6 +28,18 @@ namespace NutritionalResearchBusiness.Dtos
         /// </summary>
         public string FirstCategoryName { get; set; }
         /// <summary>
+        /// 二级分类编码
+        /// </summary>
+        public string SecondCategoryCode { get; set; }
+        /// <summary>
+        /// 二级分类名
+        /// </summary>
+        public string SecondCategoryName { get; set; }
+        /// <summary>
+        /// 食物单位
+        /// </summary>
+        public string FoodUnit { get; set; }
+        /// <summary>
         /// 描述
         /// </summary>
         public string Description { get; set; }

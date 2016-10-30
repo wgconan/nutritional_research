@@ -28,9 +28,19 @@ namespace NutritionalResearchToolApplication
 
         private void mainWindows_Loaded(object sender, RoutedEventArgs e)
         {
-            //fram1.Source = new Uri(@"Pages\MainPage.xaml", UriKind.Relative);
-            //fram1.Navigate(new Uri(@"Pages\MainPage.xaml", UriKind.Relative));
-            mainWindows.Content = new MainPage();
+            App.Current.Properties["MyFrame"] = myFrame;
+        }
+
+        private void btn_GotoMainPage_Click(object sender, RoutedEventArgs e)
+        {
+            if(!myFrame.CurrentSource.OriginalString.Contains("MainPage"))
+            {
+                myFrame.Navigate(new Uri(@"Pages\MainPage.xaml",UriKind.Relative));
+            }
+            //else
+            //{
+            //    MessageBox.Show("当前就是主页");
+            //}
         }
     }
 }

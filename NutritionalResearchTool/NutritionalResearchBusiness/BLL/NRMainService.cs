@@ -194,11 +194,16 @@ namespace NutritionalResearchBusiness.BLL
                               select new QuestionViewDto()
                               {
                                   Id = nObj.Id,
-                                  CurrentProgress = Math.Round((double)(serialNumber / questionCount), 3),
+                                  CurrentProgress = Math.Round((double)serialNumber / (double)questionCount, 3),
+                                  //CurrentProgress = serialNumber / questionCount,
                                   Description = nObj2.Description,
                                   FirstCategoryCode = nObj2.FirstCategoryCode,
                                   FirstCategoryName = nObj2.FirstCategoryName,
+                                  SecondCategoryCode = nObj2.SecondCategoryCode,
+                                  SecondCategoryName = nObj2.SecondCategoryName,
+                                  FoodUnit = nObj2.FoodUnit,
                                   ReferenceDiagramList = nObj.ReferenceDiagram
+                                  .OrderBy(r => r.Sort)
                                   .Select(r => new ReferenceDiagramDto()
                                   {
                                       Id = r.Id,
@@ -293,7 +298,11 @@ namespace NutritionalResearchBusiness.BLL
             //计算并生成膳食构成报告
             try
             {
-                var foodGroup = mydb.FoodCategory.GroupBy(nObj => nObj.StatisticsCategoryCode).ToList();
+                var foodGroup = mydb.FoodCategory
+                    .Where(nObj => nObj.StatisticsCategoryCode != null)
+                    .OrderBy(nObj => nObj.StatisticsCategoryCode)
+                    .GroupBy(nObj => nObj.StatisticsCategoryCode)
+                    .ToList();
                 foodGroup.ForEach(item =>
                 {
                     double totalAverageDailyIntake = 0;

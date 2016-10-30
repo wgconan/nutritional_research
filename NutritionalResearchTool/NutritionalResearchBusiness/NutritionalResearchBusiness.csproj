@@ -150,10 +150,10 @@
       <DependentUpon>NRModel.edmx</DependentUpon>
       <LastGenOutput>NRModel.cs</LastGenOutput>
     </Content>
-    <Content Include="DB\NutritionalResearchDatabase.mdf">
+    <Content Include="DB\NutritionalResearchDB.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="DB\NutritionalResearchDatabase_log.ldf">
+    <Content Include="DB\NutritionalResearchDB_log.ldf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

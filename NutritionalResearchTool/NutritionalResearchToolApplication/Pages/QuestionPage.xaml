@@ -1,0 +1,33 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NutritionalResearchToolApplication.Pages"
+      xmlns:Controls="clr-namespace:NutritionalResearchToolApplication.Controls" x:Class="NutritionalResearchToolApplication.Pages.QuestionPage"
+      mc:Ignorable="d" 
+      Height="576" Width="1024"
+      Title="QuestionPage" Loaded="Page_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <ProgressBar x:Name="pb_QuestionProcess" Height="20" Margin="0,5" Foreground="#FF70ED92" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Image x:Name="Img_FirstCategory" Width="50" Height="50" Margin="5,0" Visibility="Collapsed"/>
+                <TextBlock x:Name="textblock_FirstCategory" Text="粮谷类(主食)" VerticalAlignment="Center" Margin="10,0" Foreground="#FF70ED92" FontSize="20"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,30,0,10">
+                <TextBlock x:Name="textblock_SecondCategory" Text="大米及其制品" FontSize="20" HorizontalAlignment="Center" Margin="0,5,10,5" Foreground="#FF8D8776"/>
+                <TextBlock x:Name="textblock_QuestionDescription" Text="米饭/粥/米粉/粽子/烧卖等" Foreground="#FF8D8776" FontSize="20" Margin="0,5"/>
+            </StackPanel>
+        </StackPanel>
+        <Grid Name="grid_Options" Grid.Row ="1">
+            <!--<Controls:OptionControl_Type1 x:Name="MyOptionType1"/>-->
+            <!--<Controls:OptionControl_Type2 x:Name="MyOptionType2"/>-->
+            <!--<Controls:OptionControl_Type3 x:Name="MyOptionType3"/>-->
+        </Grid>
+    </Grid>
+</Page>

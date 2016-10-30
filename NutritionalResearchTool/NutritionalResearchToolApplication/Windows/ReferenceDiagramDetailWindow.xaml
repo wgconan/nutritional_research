@@ -1,0 +1,12 @@
+﻿<Window x:Class="NutritionalResearchToolApplication.Windows.ReferenceDiagramDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NutritionalResearchToolApplication.Windows"
+        mc:Ignorable="d"
+        Title="参考图示" Height="630" Width="808" WindowStyle="ToolWindow" MinWidth="808" MinHeight="630" MaxHeight="630" MaxWidth="808" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image Name="img_diagram" Stretch="Fill" />
+    </Grid>
+</Window>

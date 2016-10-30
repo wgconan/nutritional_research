@@ -1,0 +1,52 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NutritionalResearchToolApplication.Pages"
+      xmlns:Dtos="clr-namespace:NutritionalResearchBusiness.Dtos;assembly=NutritionalResearchBusiness" xmlns:Converts="clr-namespace:NutritionalResearchToolApplication.Converts" xmlns:Controls="clr-namespace:NutritionalResearchToolApplication.Controls" x:Class="NutritionalResearchToolApplication.Pages.RecordListPage"
+      mc:Ignorable="d" 
+      Height="576" Width="1024"
+      Title="RecordListPage" Loaded="Page_Loaded">
+    <Page.Resources>
+        <Converts:InvestigationRecordStateConvert x:Key="InvestigationRecordStateConvert"/>
+    </Page.Resources>
+    <Page.Background>
+        <LinearGradientBrush MappingMode="Absolute" StartPoint="0,576" EndPoint="1024,0">
+            <GradientStop Color="#FFFFAE38" Offset="0"/>
+            <GradientStop Color="#FFFFE65E" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+    <Grid>
+        <Grid Margin="20,15" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <DataGrid Grid.Row="0" x:Name="dg_Record" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Mode=OneWay}" FontSize="14" FontFamily="Microsoft YaHei UI Light" SelectionMode="Single" MinRowHeight="25">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding QueueId}" CanUserSort="False" CanUserReorder="False" Header="队列编码" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding HealthBookId}" CanUserSort="False" CanUserReorder="False" Header="手册编码" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Name}" CanUserSort="False" CanUserReorder="False" Header="姓名" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Birthday, StringFormat=\{0:yyyy-MM-dd\}}" CanUserSort="False" CanUserReorder="False" Header="出生日期" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding Height}" CanUserSort="False" CanUserReorder="False" Header="身高" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding BeforeWeight}" CanUserSort="False" CanUserReorder="False" Header="孕前体重" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding CurrentWeight}" CanUserSort="False" CanUserReorder="False" Header="当前体重" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding Week}" CanUserSort="False" CanUserReorder="False" Header="孕周" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding InvestionTime, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" CanUserSort="False" CanUserReorder="False" Header="调查日期" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding InvestigatorName}" CanUserSort="False" CanUserReorder="False" Header="调查者" IsReadOnly="True" />
+                    <DataGridTextColumn CanUserSort="False" CanUserReorder="False" Header="状态" IsReadOnly="True" Binding="{Binding State, Converter={StaticResource InvestigationRecordStateConvert}}"/>
+                    <DataGridTextColumn Binding="{Binding AuditorName}" CanUserSort="False" CanUserReorder="False" Header="审核者" IsReadOnly="True" />
+                </DataGrid.Columns>
+                <DataGrid.DataContext>
+                    <Dtos:InvestigationRecordViewDto/>
+                </DataGrid.DataContext>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0F0F0">
+                <Controls:PagerControl x:Name="myPager" VerticalAlignment="Center" Margin="236,0,50,0" PagerIndexChanged="myPager_PagerIndexChanged"/>
+                <Button Name="btn_Query" Content="条件查询" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White" Click="btn_Query_Click" />
+                <Button Name="btn_Export" Content="导出" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

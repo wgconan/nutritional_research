@@ -5,21 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6afcac7d2a5e4688adaba640b77fd687" Name="Diagram1">
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.FoodCategory" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.FoodNutritions" Width="1.5" PointX="10.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.Foods" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.InvestigationAnswer" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.NuritiveElement" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.NutrtiveElementIntakeStatistics" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.Question" Width="1.5" PointX="5.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.ReferenceDiagram" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
-        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_FOODS_REFERENCE_FOODCATE" ManuallyRouted="false" />
-        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_FOODNUTR_REFERENCE_FOODS" ManuallyRouted="false" />
-        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_REFERENC_REFERENCE_QUESTION" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.InvestigationRecord" Width="1.5" PointX="0.75" PointY="3.375" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.FoodCategory" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.FoodNutritions" Width="1.5" PointX="10.25" PointY="1.5" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.Foods" Width="1.5" PointX="8" PointY="1.125" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.InvestigationAnswer" Width="1.5" PointX="3" PointY="4.75" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.NuritiveElement" Width="1.5" PointX="5.75" PointY="9.75" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.NutrtiveElementIntakeStatistics" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.Question" Width="1.5" PointX="5.75" PointY="6" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.ReferenceDiagram" Width="1.5" PointX="8" PointY="6" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.StructureOfMeals" Width="1.5" PointX="3" PointY="1.375" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_FOODS_REFERENCE_FOODCATE" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_FOODNUTR_REFERENCE_FOODS" />
+        <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_REFERENC_REFERENCE_QUESTION" />
+        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.InvestigationRecord" Width="1.5" PointX="0.75" PointY="3.875" />
         <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_INVESTIG_REFERENCE_INVESTIG" />
         <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_NUTRTIVE_REFERENCE_INVESTIG" />
-        <EntityTypeShape EntityType="NutritionalResearchDatabaseModel.StructureOfMeals" Width="1.5" PointX="3" PointY="8.375" />
         <AssociationConnector Association="NutritionalResearchDatabaseModel.FK_STRUCTUR_REFERENCE_INVESTIG" />
       </Diagram>
     </edmx:Diagrams>

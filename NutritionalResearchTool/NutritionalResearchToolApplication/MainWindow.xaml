@@ -5,31 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NutritionalResearchToolApplication"
         mc:Ignorable="d"
-        Name="mainWindows"
-        Title="MainWindow" Height="600" Width="800" Loaded="mainWindows_Loaded">
-    <Grid Margin="0,0,-290,0">
-        <Frame x:Name="fram1" />
-        <!--<Label x:Name="label_Copy" Content="调查者" HorizontalAlignment="Left" Margin="415,34,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy1" Content="围产保健手册编码" HorizontalAlignment="Left" Margin="252,34,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy2" Content="队列编码" HorizontalAlignment="Left" Margin="105,34,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy3" Content="姓名" HorizontalAlignment="Left" Margin="105,98,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy4" Content="出生日期" HorizontalAlignment="Left" Margin="252,98,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy5" Content="孕周" HorizontalAlignment="Left" Margin="415,98,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy6" Content="身高" HorizontalAlignment="Left" Margin="105,164,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy7" Content="孕前体重" HorizontalAlignment="Left" Margin="252,164,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy8" Content="当前体重" HorizontalAlignment="Left" Margin="415,164,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxQueueID" HorizontalAlignment="Left" Height="23" Margin="105,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxHealthbookID" HorizontalAlignment="Left" Height="23" Margin="252,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxInvestigatorName" HorizontalAlignment="Left" Height="23" Margin="415,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="105,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxBirthday" HorizontalAlignment="Left" Height="23" Margin="252,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxWeek" HorizontalAlignment="Left" Height="23" Margin="415,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Height="23" Margin="105,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxBeforeWeight" HorizontalAlignment="Left" Height="23" Margin="252,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <TextBox x:Name="textBoxCurrentWeight" HorizontalAlignment="Left" Height="23" Margin="415,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="72"/>
-        <Button x:Name="buttonBegin" Content="开始测试" HorizontalAlignment="Left" Margin="453,260,0,0" VerticalAlignment="Top" Width="75" Click="buttonBegin_Click"/>
-        <Label x:Name="labelRecordsCount" Content="填表份数" HorizontalAlignment="Left" Margin="17,229,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="buttonViewRecords" Content="点击查看记录" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" Width="75" Click="buttonViewRecords_Click" />-->
+        x:Name="mainWindows"
+        Title="孕期食物频率调查系统" Height="650" Width="1032" Loaded="mainWindows_Loaded" MinWidth="1032" MaxWidth="1032" MinHeight="650" MaxHeight="650" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" >
+            <Button Name="btn_GotoMainPage" Content="主页" Height="25" Width="60" Margin="5,0" FontSize="16" Foreground="#FF25C6F5" Background="{x:Null}" BorderThickness="0" Click="btn_GotoMainPage_Click"/>
+            <TextBlock Text="孕期食物频率调查系统" VerticalAlignment="Center" FontSize="16" Margin="5,0" Foreground="#FF8D8776" HorizontalAlignment="Left" FontFamily="Microsoft YaHei UI Light"/>
+        </StackPanel>
+        <Frame Grid.Row="1" Name="myFrame" Source="Pages\MainPage.xaml" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

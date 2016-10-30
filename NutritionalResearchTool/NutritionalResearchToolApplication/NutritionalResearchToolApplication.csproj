@@ -78,9 +78,47 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusinessStaticInstances.cs" />
+    <Compile Include="Controls\OptionControl_Type1.xaml.cs">
+      <DependentUpon>OptionControl_Type1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OptionControl_Type2.xaml.cs">
+      <DependentUpon>OptionControl_Type2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OptionControl_Type3.xaml.cs">
+      <DependentUpon>OptionControl_Type3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PagerControl.xaml.cs">
+      <DependentUpon>PagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converts\InvestigationRecordStateConvert.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RecordListPage.xaml.cs">
+      <DependentUpon>RecordListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\QueryConditionsWindow.xaml.cs">
+      <DependentUpon>QueryConditionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ReferenceDiagramDetailWindow.xaml.cs">
+      <DependentUpon>ReferenceDiagramDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\OptionControl_Type1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionControl_Type2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionControl_Type3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,8 +135,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\QuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RecordListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\QueryConditionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ReferenceDiagramDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\QuestionPage.xaml.cs">
+      <DependentUpon>QuestionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,7 +184,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Resources\Icons\Diagram\f01a\100g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f01a\20g.JPG" />
+    <Resource Include="Resources\Icons\Diagram\f01a\45g.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NutritionalResearchBusiness\NutritionalResearchBusiness.csproj">
@@ -151,6 +210,82 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\main_left.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f01a\150g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f01b\50g_01.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f01b\50g_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f01c\50g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f02a\100g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f02a\50g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f02a\60g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f03a\20g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f03a\100g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f03a\360g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f05a\30g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f05a\140g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f06a\110g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f06a\200g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f06b\100g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f06b\10g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f06d\16g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f06d\100g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f06i\35g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f06j\100g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f06j\50g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f06k\20g_01.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f06k\20g_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f07e\410g_350g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f07e\110g_80g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f07f\270g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f07f\100g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f07h\50g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f07j\25g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f07j\5g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f08a\20g_8g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f08a\10g_5g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f08a\40g_20g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Diagram\f11a\10g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f11a\20g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f11a\25g.jpg" />
+    <Resource Include="Resources\Icons\Diagram\f11a\30g.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

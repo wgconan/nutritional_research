@@ -31,7 +31,10 @@ namespace NutritionalResearchToolApplication.Pages
 
         private void buttonBegin_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(textBoxQueueID.Text))
+            //App.Current.Properties["CurrentRecordId"] = Guid.Parse("f02a6307-9042-4424-b239-d96efd650a57");
+            //Frame myframe = App.Current.Properties["MyFrame"] as Frame;
+            //myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative));
+            if (string.IsNullOrEmpty(textBoxQueueID.Text))
             {
                 textBlock_Required1.Visibility = Visibility.Visible;
                 return;
@@ -76,7 +79,7 @@ namespace NutritionalResearchToolApplication.Pages
                 textBlock_Required9.Visibility = Visibility.Visible;
                 return;
             }
-            if(!textBoxQueueID.Text.IsNumeric())
+            if (!textBoxQueueID.Text.IsNumeric())
             {
                 MessageBox.Show("队列编码必须为数字");
                 return;
@@ -127,7 +130,9 @@ namespace NutritionalResearchToolApplication.Pages
                     Week = int.Parse(textBoxWeek.Text)
                 };
                 Guid myID = myMainService.CreateNewInvestigationRecord(newRecord);
-                MessageBox.Show(myID.ToString());
+                App.Current.Properties["CurrentRecordId"] = myID;
+                Frame myframe = App.Current.Properties["MyFrame"] as Frame;
+                myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative));
             }
             catch (Exception ex)
             {
@@ -137,15 +142,8 @@ namespace NutritionalResearchToolApplication.Pages
 
         private void buttonViewRecords_Click(object sender, RoutedEventArgs e)
         {
-            //INRMainService myMainService = BusinessStaticInstances.GetSingleMainServiceInstance();
-            //try
-            //{
-            //    labelRecordsCount.Content = myMainService.GetInvestigationRecordCount().ToString();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            Frame myframe = App.Current.Properties["MyFrame"] as Frame;
+            myframe.Navigate(new Uri(@"Pages\RecordListPage.xaml", UriKind.Relative));
         }
 
         private void labelRecordsCount_Loaded(object sender, RoutedEventArgs e)
@@ -153,11 +151,11 @@ namespace NutritionalResearchToolApplication.Pages
             INRMainService myMainService = BusinessStaticInstances.GetSingleMainServiceInstance();
             try
             {
-                labelRecordsCount.Content = myMainService.GetFinishedInvestigationRecordCount().ToString();
+                labelRecordsCount.Content = myMainService.GetFinishedInvestigationRecordCount().ToString() + " 份";
             }
             catch (Exception)
             {
-                labelRecordsCount.Content = 0;
+                labelRecordsCount.Content = "0 份";
             }
         }
 
@@ -199,6 +197,11 @@ namespace NutritionalResearchToolApplication.Pages
                         return;
                 }
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties["CurrentRecordId"] = Guid.Empty;
         }
     }
 }

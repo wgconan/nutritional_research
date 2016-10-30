@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="NutritionalResearchToolApplication.Controls.PagerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NutritionalResearchToolApplication.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="480" Loaded="UserControl_Loaded">
+    <Grid>
+        <WrapPanel>
+            <Button Name="btnFirstPage" Content="首页" Width="40" Margin="2" Click="btnFirstPage_Click"></Button>
+            <Button Name="btnPageDown" Content="下一页" Width="50" Margin="2" Click="btnPageDown_Click"></Button>
+            <Button Name="btnPageUp" Content="上一页" Width="50" Margin="2" Click="btnPageUp_Click"></Button>
+            <Button Name="btnEndPage" Content="尾页" Width="40" Margin="2" Click="btnEndPage_Click"></Button>
+            <TextBlock Name="txtPagerInfo" Text="当前第【{0}】页，共【{1}】页，共【{2}】条记录" Margin="5" Foreground="#FF8D8776"></TextBlock>
+        </WrapPanel>
+    </Grid>
+</UserControl>
