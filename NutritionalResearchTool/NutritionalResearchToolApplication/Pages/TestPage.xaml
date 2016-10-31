@@ -137,7 +137,10 @@
                     <TextBox Name="tb_Element30" Width="80" FontSize="16" Margin="5,0,0,0" Tag="6d578288-beac-43ff-a72b-dc5cc86316fc" />
                 </StackPanel>
             </WrapPanel>
+            
             <Button Name="btn" Content="提交" Width="100" Height="30" Margin="0,10" Click="btn_Click" />
+            <TextBox Name="txtInputElements" Margin="5,5,5,5" />
+            <Button Name="btn2" Content="快速提交" Click="btn2_Click"/>
         </StackPanel>
     </Grid>
 </Page>
