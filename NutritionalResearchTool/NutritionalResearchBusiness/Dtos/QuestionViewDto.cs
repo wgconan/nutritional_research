@@ -55,5 +55,9 @@ namespace NutritionalResearchBusiness.Dtos
         /// 当前进度
         /// </summary>
         public double CurrentProgress { get; set; }
+        /// <summary>
+        /// 当前答案（可能为Null）
+        /// </summary>
+        public InvestigationAnswerOutputDto CurrentAnswer { get; set; }
     }
 }

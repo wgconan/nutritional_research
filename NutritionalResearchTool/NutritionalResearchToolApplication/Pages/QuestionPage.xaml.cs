@@ -31,13 +31,23 @@ namespace NutritionalResearchToolApplication.Pages
 
         public QuestionPage()
         {
+            Frame myframe = App.Current.Properties["MyFrame"] as Frame;
+            myframe.Navigated += Myframe_Navigated;
             InitializeComponent();
+        }
+
+        private void Myframe_Navigated(object sender, NavigationEventArgs e)
+        {
+            if(e.ExtraData != null)
+            {
+                serialNumber = (int)e.ExtraData;
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             recordId = (Guid)App.Current.Properties["CurrentRecordId"];
-            serialNumber = 1;
+            //serialNumber = 1;
             textblock_FirstCategory.Text = recordId.ToString();
             LoadQuestionInfo(serialNumber);
         }
@@ -47,7 +57,7 @@ namespace NutritionalResearchToolApplication.Pages
             try
             {
                 INRMainService myMainService = BusinessStaticInstances.GetSingleMainServiceInstance();
-                questionObj = myMainService.GetQuestionViewBySerialNumber(serialNumber);
+                questionObj = myMainService.GetQuestionViewBySerialNumber(serialNumber,recordId);
                 pb_QuestionProcess.Value = questionObj.CurrentProgress * 100;
                 textblock_FirstCategory.Text = questionObj.FirstCategoryName;
                 textblock_SecondCategory.Text = questionObj.SecondCategoryName;
@@ -148,8 +158,5 @@ namespace NutritionalResearchToolApplication.Pages
             Frame myframe = App.Current.Properties["MyFrame"] as Frame;
             myframe.Navigate(new Uri(@"Pages\MainPage.xaml", UriKind.Relative));
         }
-
-        
-        
     }
 }

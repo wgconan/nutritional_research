@@ -69,6 +69,25 @@ namespace NutritionalResearchToolApplication.Controls
             rb_Option_Yes.Checked += Rb_Option_Yes_Checked; ;
             rb_Option_No.Checked += Rb_Option_No_Checked; ;
             #endregion
+
+            #region 如果为已答题，则加载当前答案
+            if (_questionObj.CurrentAnswer != null)
+            {
+                if (_questionObj.CurrentAnswer.AnswerValue1.HasValue)
+                {
+                    switch (_questionObj.CurrentAnswer.AnswerValue1.Value)
+                    {
+                        case 1:
+                            rb_Option_Yes.IsChecked = true;
+                            tb_OptionN.Text = (_questionObj.CurrentAnswer.AnswerValue2.HasValue) ? _questionObj.CurrentAnswer.AnswerValue2.Value.ToString() : string.Empty;
+                            break;
+                        default:
+                            rb_Option_No.IsChecked = true;
+                            break;
+                    }
+                }
+            }
+            #endregion
         }
 
         private void Rb_Option_No_Checked(object sender, RoutedEventArgs e)
@@ -110,7 +129,7 @@ namespace NutritionalResearchToolApplication.Controls
             }
             else
             {
-                answer.AnswerValue1 = null;
+                answer.AnswerValue1 = 0;
                 answer.AnswerValue2 = null;
             }
             try

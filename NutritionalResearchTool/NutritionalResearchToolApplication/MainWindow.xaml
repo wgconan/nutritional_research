@@ -16,6 +16,6 @@
             <Button Name="btn_GotoMainPage" Content="主页" Height="25" Width="60" Margin="5,0" FontSize="16" Foreground="#FF25C6F5" Background="{x:Null}" BorderThickness="0" Click="btn_GotoMainPage_Click"/>
             <TextBlock Text="孕期食物频率调查系统" VerticalAlignment="Center" FontSize="16" Margin="5,0" Foreground="#FF8D8776" HorizontalAlignment="Left" FontFamily="Microsoft YaHei UI Light"/>
         </StackPanel>
-        <Frame Grid.Row="1" Name="myFrame" Source="Pages\MainPage.xaml" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="1" Name="myFrame" Source="Pages\TestPage.xaml" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

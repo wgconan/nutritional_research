@@ -16,6 +16,7 @@ using NutritionalResearchBusiness.Dtos;
 using NutritionalResearchBusiness;
 using NutritionalResearchBusiness.Extensions;
 using NutritionalResearchToolApplication.Windows;
+using NutritionalResearchBusiness.Enums;
 
 namespace NutritionalResearchToolApplication.Pages
 {
@@ -85,15 +86,103 @@ namespace NutritionalResearchToolApplication.Pages
         private void Querywindow_Closed(object sender, EventArgs e)
         {
             QueryConditionsWindow querywindow = sender as QueryConditionsWindow;
-            if(querywindow != null)
+            if (querywindow != null)
             {
-                if(querywindow.IsCancel == false)
+                if (querywindow.IsCancel == false)
                 {
                     myPager.PageIndex = 1;
                     DgUserDataBind();
                 }
                 querywindow.Closed -= Querywindow_Closed;
             }
+        }
+
+        private void tb_ContinueAnswer_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            switch (record.State)
+            {
+                case InvestigationRecordStateType.NoFinish:
+                    btn.Visibility = Visibility.Visible;
+                    break;
+                case InvestigationRecordStateType.FinishedAndNoAudit:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                case InvestigationRecordStateType.FinishedAndAudited:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void tb_ModifyAnswer_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            switch (record.State)
+            {
+                case InvestigationRecordStateType.NoFinish:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                case InvestigationRecordStateType.FinishedAndNoAudit:
+                    btn.Visibility = Visibility.Visible;
+                    break;
+                case InvestigationRecordStateType.FinishedAndAudited:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void tb_ViewReport_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            switch (record.State)
+            {
+                case InvestigationRecordStateType.NoFinish:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                case InvestigationRecordStateType.FinishedAndNoAudit:
+                    btn.Visibility = Visibility.Visible;
+                    break;
+                case InvestigationRecordStateType.FinishedAndAudited:
+                    btn.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void tb_ContinueAnswer_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            if (record.State != InvestigationRecordStateType.NoFinish)
+            {
+                MessageBox.Show("该调查已完成");
+                return;
+            }
+            App.Current.Properties["CurrentRecordId"] = record.Id;
+            Frame myframe = App.Current.Properties["MyFrame"] as Frame;
+            myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), record.LastFinishQuestionSN + 1);
+        }
+
+        private void tb_ModifyAnswer_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            if (record.State != InvestigationRecordStateType.FinishedAndNoAudit)
+            {
+                MessageBox.Show("该调查已审核,不能修改");
+                return;
+            }
+            App.Current.Properties["CurrentRecordId"] = record.Id;
+            Frame myframe = App.Current.Properties["MyFrame"] as Frame;
+            myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), 1);
         }
     }
 }

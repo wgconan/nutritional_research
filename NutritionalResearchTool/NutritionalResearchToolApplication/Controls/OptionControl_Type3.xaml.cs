@@ -41,6 +41,7 @@ namespace NutritionalResearchToolApplication.Controls
 
         private void btn_Finish_Click(object sender, RoutedEventArgs e)
         {
+            SubmitAnswerToDB();
             if (FinishedInputEvent != null)
             {
                 FinishedInputEvent(_questionObj.Id, new EventArgs());
@@ -58,6 +59,29 @@ namespace NutritionalResearchToolApplication.Controls
             rb_Option_A.Checked += Rb_Option_A_Checked; 
             rb_Option_B.Checked += Rb_Option_B_Checked;
             rb_Option_C.Checked += Rb_Option_C_Checked;
+            #endregion
+
+            #region 如果为已答题，则加载当前答案
+            if (_questionObj.CurrentAnswer != null)
+            {
+                if (_questionObj.CurrentAnswer.AnswerValue1.HasValue)
+                {
+                    switch (_questionObj.CurrentAnswer.AnswerValue1.Value)
+                    {
+                        case 1:
+                            rb_Option_A.IsChecked = true;
+                            break;
+                        case 2:
+                            rb_Option_B.IsChecked = true;
+                            break;
+                        case 3:
+                            rb_Option_C.IsChecked = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
             #endregion
         }
 

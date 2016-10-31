@@ -37,6 +37,17 @@
                     <DataGridTextColumn Binding="{Binding InvestigatorName}" CanUserSort="False" CanUserReorder="False" Header="调查者" IsReadOnly="True" />
                     <DataGridTextColumn CanUserSort="False" CanUserReorder="False" Header="状态" IsReadOnly="True" Binding="{Binding State, Converter={StaticResource InvestigationRecordStateConvert}}"/>
                     <DataGridTextColumn Binding="{Binding AuditorName}" CanUserSort="False" CanUserReorder="False" Header="审核者" IsReadOnly="True" />
+                    <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="操作" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Button Name="tb_ContinueAnswer" Content="继续调查" FontSize="12" Width="60" Margin="5,0" Tag="{Binding Mode=OneWay}" Loaded="tb_ContinueAnswer_Loaded" Click="tb_ContinueAnswer_Click"/>
+                                    <Button Name="tb_ModifyAnswer" Content="修改答案" FontSize="12" Width="60" Margin="5,0" Tag="{Binding Mode=OneWay}" Loaded="tb_ModifyAnswer_Loaded" Click="tb_ModifyAnswer_Click"/>
+                                    <Button Name="tb_ViewReport" Content="查看报告" FontSize="12" Width="60" Margin="5,0" Tag="{Binding Mode=OneWay}" Loaded="tb_ViewReport_Loaded"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
                 <DataGrid.DataContext>
                     <Dtos:InvestigationRecordViewDto/>

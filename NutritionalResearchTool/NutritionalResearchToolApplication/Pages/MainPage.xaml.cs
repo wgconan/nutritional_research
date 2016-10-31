@@ -132,7 +132,7 @@ namespace NutritionalResearchToolApplication.Pages
                 Guid myID = myMainService.CreateNewInvestigationRecord(newRecord);
                 App.Current.Properties["CurrentRecordId"] = myID;
                 Frame myframe = App.Current.Properties["MyFrame"] as Frame;
-                myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative));
+                myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative),1);
             }
             catch (Exception ex)
             {

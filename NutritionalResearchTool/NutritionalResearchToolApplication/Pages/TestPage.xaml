@@ -1,0 +1,143 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NutritionalResearchToolApplication.Pages"
+      xmlns:DAL="clr-namespace:NutritionalResearchBusiness.DAL;assembly=NutritionalResearchBusiness" x:Class="NutritionalResearchToolApplication.Pages.TestPage"
+      mc:Ignorable="d" 
+      Height="576" Width="1024"
+      Title="TestPage" Loaded="Page_Loaded">
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <ComboBox x:Name="cb_Foods" IsReadOnly="True" ItemsSource="{Binding Mode=OneWay}" DisplayMemberPath="TypicalFood" Width="110" HorizontalAlignment="Left" Margin="50,20,0,0" >
+                <ComboBox.DataContext>
+                    <DAL:Foods/>
+                </ComboBox.DataContext>
+            </ComboBox>
+            <WrapPanel Name="myWrapPanel" Margin="50,10,50,10">
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="kcal" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element01" Width="80" FontSize="16" Margin="5,0,0,0" Tag="0cc17275-bf63-4196-90df-97fbeaded769" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="kj" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element02" Width="80" FontSize="16" Margin="5,0,0,0" Tag="0d47b309-5267-42b2-ac14-1c9848f0cd37" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Protein" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element03" Width="80" FontSize="16" Margin="5,0,0,0" Tag="99568846-6f48-455b-9190-ece79e614c38" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Fat" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element04" Width="80" FontSize="16" Margin="5,0,0,0" Tag="42b9a89f-3fa8-43a1-854d-b7c33b4cc7d3" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="carbo" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element05" Width="80" FontSize="16" Margin="5,0,0,0" Tag="60747f55-5cf6-43df-a4fb-7c0e4ef8d228" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Ca" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element06" Width="80" FontSize="16" Margin="5,0,0,0" Tag="4c305cd2-2798-4305-8351-82eeb9f878c0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="P" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element07" Width="80" FontSize="16" Margin="5,0,0,0" Tag="109f1b16-759f-4c55-888a-90c44a828d75" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="K" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element08" Width="80" FontSize="16" Margin="5,0,0,0" Tag="3f8303b3-5c1f-427e-a7e1-90ba5438ef89" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Na" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element09" Width="80" FontSize="16" Margin="5,0,0,0" Tag="29d6ed1d-89b8-48b2-a54d-4a4aab664578" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Mg" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element10" Width="80" FontSize="16" Margin="5,0,0,0" Tag="f47dc264-c932-40fe-b2c1-20b9180001e2" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Fe" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element11" Width="80" FontSize="16" Margin="5,0,0,0" Tag="1353190b-26e3-4989-913f-7c99c4237b57" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Zn" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element12" Width="80" FontSize="16" Margin="5,0,0,0" Tag="7b5aa0f9-b2ec-4990-826e-7fcd3bd34fdf" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Se" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element13" Width="80" FontSize="16" Margin="5,0,0,0" Tag="23a40a5d-5afd-43d1-876b-337970260aeb" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Cu" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element14" Width="80" FontSize="16" Margin="5,0,0,0" Tag="947f346f-ad85-4ecb-8471-d9e8fd0f2493" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Mn" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element15" Width="80" FontSize="16" Margin="5,0,0,0" Tag="c91def7e-edb6-46dc-808b-368b5770a93f" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="cholestl" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element16" Width="80" FontSize="16" Margin="5,0,0,0" Tag="1e28e117-2afd-48c4-8dae-541089bd107a" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="rentinol" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element17" Width="80" FontSize="16" Margin="5,0,0,0" Tag="8125918e-014c-4db6-aeb5-d9b99a43194d" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="caroten" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element18" Width="80" FontSize="16" Margin="5,0,0,0" Tag="74f2bf4d-7058-4743-91f2-f674546e6ebb" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="vita" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element19" Width="80" FontSize="16" Margin="5,0,0,0" Tag="6c3bf476-4c94-43fe-ae66-1c031b6c3861" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="vc" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element20" Width="80" FontSize="16" Margin="5,0,0,0" Tag="7f03ba0f-599e-418a-a6fe-9ead3faa9dcf" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="ve" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element21" Width="80" FontSize="16" Margin="5,0,0,0" Tag="929830cd-c275-4d98-b239-33efc70b2f74" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Thiamin" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element22" Width="80" FontSize="16" Margin="5,0,0,0" Tag="77137cfc-454c-4e65-9150-67c3b7bf0eca" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Riboflav" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element23" Width="80" FontSize="16" Margin="5,0,0,0" Tag="47cd8c7e-64a0-414c-976f-6aa570eaf03c" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Niacin" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element24" Width="80" FontSize="16" Margin="5,0,0,0" Tag="77a52568-236a-46fc-b2a0-5679608248b7" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Water" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element25" Width="80" FontSize="16" Margin="5,0,0,0" Tag="97a83f2a-716c-44cb-a244-4b051cc28948" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="Ash" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element26" Width="80" FontSize="16" Margin="5,0,0,0" Tag="e5745dfc-59c6-437a-99d7-d9fa5d0cda2b" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="ve_1" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element27" Width="80" FontSize="16" Margin="5,0,0,0" Tag="1437ec32-27a6-4d36-a857-f8c400410ba3" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="ve_2" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element28" Width="80" FontSize="16" Margin="5,0,0,0" Tag="5fe79ebd-54e3-4e64-ac10-72c8f5fd379e" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="ve_3" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element29" Width="80" FontSize="16" Margin="5,0,0,0" Tag="ca6b7d89-0e6c-49fc-a5d7-47f97b3ccb3e" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                    <TextBlock Text="fiber" FontSize="16" Margin="0,0,5,0"/>
+                    <TextBox Name="tb_Element30" Width="80" FontSize="16" Margin="5,0,0,0" Tag="6d578288-beac-43ff-a72b-dc5cc86316fc" />
+                </StackPanel>
+            </WrapPanel>
+            <Button Name="btn" Content="提交" Width="100" Height="30" Margin="0,10" Click="btn_Click" />
+        </StackPanel>
+    </Grid>
+</Page>

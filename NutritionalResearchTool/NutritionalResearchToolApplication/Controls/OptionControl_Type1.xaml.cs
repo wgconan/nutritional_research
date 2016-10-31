@@ -176,6 +176,56 @@ namespace NutritionalResearchToolApplication.Controls
                 img_Diagram3.Visibility = Visibility.Hidden;
                 textblock_Diagram3.Visibility = Visibility.Hidden;
             }
+
+            #region 如果为已答题，则加载当前答案
+            if (_questionObj.CurrentAnswer != null)
+            {
+                switch (_questionObj.CurrentAnswer.Answer_Type)
+                {
+                    case AnswerType.Month:
+                        cb_OptionType.SelectedIndex = 0;
+                        break;
+                    case AnswerType.Week:
+                        cb_OptionType.SelectedIndex = 1;
+                        break;
+                    case AnswerType.Day:
+                        cb_OptionType.SelectedIndex = 2;
+                        break;
+                    case AnswerType.Other:
+                    default:
+                        break;
+                }
+                if(_questionObj.CurrentAnswer.AnswerValue1.HasValue)
+                {
+                    switch (_questionObj.CurrentAnswer.AnswerValue1.Value)
+                    {
+                        case 1:
+                            rb_Option1.IsChecked = true;
+                            break;
+                        case 2:
+                            rb_Option2.IsChecked = true;
+                            break;
+                        case 3:
+                            rb_Option3.IsChecked = true;
+                            break;
+                        case 4:
+                            rb_Option4.IsChecked = true;
+                            break;
+                        case 5:
+                            rb_Option5.IsChecked = true;
+                            break;
+                        case 6:
+                            rb_Option6.IsChecked = true;
+                            break;
+                        default:
+                            rb_OptionN.IsChecked = true;
+                            tb_OptionN.Text = _questionObj.CurrentAnswer.AnswerValue1.Value.ToString();
+                            break;
+                    }
+                }
+                tb_Intake.Text = (_questionObj.CurrentAnswer.AnswerValue2.HasValue) ? _questionObj.CurrentAnswer.AnswerValue2.Value.ToString() : string.Empty;
+            }
+            #endregion
         }
 
         private void tb_OptionN_TextChanged(object sender, TextChangedEventArgs e)

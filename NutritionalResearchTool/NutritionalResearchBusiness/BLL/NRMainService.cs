@@ -158,13 +158,16 @@ namespace NutritionalResearchBusiness.BLL
                 {
                     throw new ArgumentException("无效记录Id");
                 }
-                if ((InvestigationRecordStateType)record.State != InvestigationRecordStateType.NoFinish)
+                if ((InvestigationRecordStateType)record.State == InvestigationRecordStateType.FinishedAndAudited)
                 {
-                    throw new InvalidOperationException("该记录已完成，不能重复操作");
+                    throw new InvalidOperationException("该记录已审核，不能进行相关操作");
+                }
+                else if((InvestigationRecordStateType)record.State == InvestigationRecordStateType.NoFinish)
+                {
+                    record.State = (int)InvestigationRecordStateType.FinishedAndNoAudit;
                 }
                 //由于初始数据还未导入完整，现为方便调试，暂时屏蔽完成记录就生成报告的逻辑
                 //GenerateOrUpdateReport(record, mydb);
-                record.State = (int)InvestigationRecordStateType.FinishedAndNoAudit;
                 try
                 {
                     mydb.SaveChanges();
@@ -184,7 +187,7 @@ namespace NutritionalResearchBusiness.BLL
             }
         }
 
-        public QuestionViewDto GetQuestionViewBySerialNumber(int serialNumber)
+        public QuestionViewDto GetQuestionViewBySerialNumber(int serialNumber, Guid recordId)
         {
             using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
             {
@@ -196,7 +199,6 @@ namespace NutritionalResearchBusiness.BLL
                               {
                                   Id = nObj.Id,
                                   CurrentProgress = Math.Round((double)serialNumber / (double)questionCount, 3),
-                                  //CurrentProgress = serialNumber / questionCount,
                                   Description = nObj2.Description,
                                   FirstCategoryCode = nObj2.FirstCategoryCode,
                                   FirstCategoryName = nObj2.FirstCategoryName,
@@ -213,7 +215,22 @@ namespace NutritionalResearchBusiness.BLL
                                       Value = r.Value
                                   }).ToList(),
                                   SerialNumber = nObj.SerialNumber,
-                                  Type = (QuestionType)nObj.Type
+                                  Type = (QuestionType)nObj.Type,
+                                  CurrentAnswer = mydb.InvestigationAnswer
+                                  .Where(a => a.InvestigationRecordId == recordId && a.QuestionId == nObj.Id)
+                                  .Select(a => new InvestigationAnswerOutputDto()
+                                  {
+                                      AnswerValue1 = a.AnswerValue1,
+                                      AnswerValue2 = a.AnswerValue2,
+                                      Answer_Type = (AnswerType)a.AnswerType,
+                                      CreationTime = a.CreationTime,
+                                      Id = a.Id,
+                                      InvestigationRecordId = a.InvestigationRecordId,
+                                      QuestionId = a.QuestionId,
+                                      QuestionSerialNumber = a.QuestionSerialNumber,
+                                      Question_Type = (QuestionType)a.QuestionType,
+                                      UpdationTime = a.UpdationTime
+                                  }).FirstOrDefault()
                               }).SingleOrDefault();
                 if (result == null)
                 {

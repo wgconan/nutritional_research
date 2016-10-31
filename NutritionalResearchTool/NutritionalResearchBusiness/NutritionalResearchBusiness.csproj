@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Dtos\AboutPageQuery.cs" />
     <Compile Include="Dtos\InvestigationAnswerInputDto.cs" />
+    <Compile Include="Dtos\InvestigationAnswerOutputDto.cs" />
     <Compile Include="Dtos\InvestigationRecordListViewDto.cs" />
     <Compile Include="Dtos\InvestigationRecordQueryConditions.cs" />
     <Compile Include="Dtos\NewInvestigationRecordDto.cs" />
