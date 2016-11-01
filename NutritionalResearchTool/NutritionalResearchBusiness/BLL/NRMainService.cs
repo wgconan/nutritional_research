@@ -166,8 +166,15 @@ namespace NutritionalResearchBusiness.BLL
                 {
                     record.State = (int)InvestigationRecordStateType.FinishedAndNoAudit;
                 }
-                //由于初始数据还未导入完整，现为方便调试，暂时屏蔽完成记录就生成报告的逻辑
-                //GenerateOrUpdateReport(record, mydb);
+                //try
+                //{
+                //    mydb.SaveChanges();
+                //}
+                //catch (Exception ex)
+                //{
+                //    throw ex;
+                //}
+                GenerateOrUpdateReport(record, mydb);
                 try
                 {
                     mydb.SaveChanges();
@@ -313,6 +320,38 @@ namespace NutritionalResearchBusiness.BLL
         private void GenerateOrUpdateReport(InvestigationRecord record, NutritionalResearchDatabaseEntities mydb)
         {
             Dictionary<FoodCategory, double> foodCategoryAverageDailyIntake = new Dictionary<FoodCategory, double>();
+            //清除旧的膳食构成报告
+            //try
+            //{
+            //    //var oldreport1 = mydb.StructureOfMeals.Where(nObj => nObj.RecordId == record.Id).ToList();
+            //    //if(oldreport1.Count > 0)
+            //    //{
+            //    //    mydb.StructureOfMeals.RemoveRange(oldreport1);
+            //    //    mydb.SaveChanges();
+            //    //}
+            //    record.StructureOfMeals.Clear();
+            //    mydb.SaveChanges();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception("清除旧的膳食构成报告出错！", ex);
+            //}
+            ////清除旧的膳食构成报告
+            //try
+            //{
+            //    //var oldreport2 = mydb.NutrtiveElementIntakeStatistics.Where(nObj => nObj.RecordId == record.Id).ToList();
+            //    //if (oldreport2.Count > 0)
+            //    //{
+            //    //    mydb.NutrtiveElementIntakeStatistics.RemoveRange(oldreport2);
+            //    //    mydb.SaveChanges();
+            //    //}
+            //    record.NutrtiveElementIntakeStatistics.Clear();
+            //    mydb.SaveChanges();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception("清除旧的膳食构成报告出错！", ex);
+            //}
             //计算并生成膳食构成报告
             try
             {
@@ -326,10 +365,14 @@ namespace NutritionalResearchBusiness.BLL
                     double totalAverageDailyIntake = 0;
                     item.ToList().ForEach(cate =>
                     {
-                        var _answer = (from nObj in mydb.Question
-                                       join nObj2 in record.InvestigationAnswer on nObj.Id equals nObj2.QuestionId
-                                       where nObj.CategoryId == cate.Id
-                                       select nObj2).SingleOrDefault();
+                        //var _answer = (from nObj in mydb.Question
+                        //               join nObj2 in record.InvestigationAnswer on nObj.Id equals nObj2.QuestionId
+                        //               where nObj.CategoryId == cate.Id
+                        //               select nObj2).SingleOrDefault();
+                        var _answer = (from nObj in record.InvestigationAnswer
+                                       join nObj2 in mydb.Question on nObj.QuestionId equals nObj2.Id
+                                       where nObj2.CategoryId == cate.Id
+                                       select nObj).SingleOrDefault();
                         if (_answer != null && _answer.AnswerValue1.HasValue && _answer.AnswerValue2.HasValue)
                         {
                             var _intake = ComputerAverageDailyIntake((AnswerType)_answer.AnswerType, _answer.AnswerValue1.Value, _answer.AnswerValue2.Value);

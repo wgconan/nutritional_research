@@ -97,14 +97,17 @@
     <Compile Include="Pages\RecordListPage.xaml.cs">
       <DependentUpon>RecordListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
+    <Compile Include="Windows\AuditRecordWindow.xaml.cs">
+      <DependentUpon>AuditRecordWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\QueryConditionsWindow.xaml.cs">
       <DependentUpon>QueryConditionsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ReferenceDiagramDetailWindow.xaml.cs">
       <DependentUpon>ReferenceDiagramDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WatingWindow.xaml.cs">
+      <DependentUpon>WatingWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\OptionControl_Type1.xaml">
       <SubType>Designer</SubType>
@@ -146,7 +149,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TestPage.xaml">
+    <Page Include="Windows\AuditRecordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ReferenceDiagramDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WatingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

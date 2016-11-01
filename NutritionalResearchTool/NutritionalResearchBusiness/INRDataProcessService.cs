@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NutritionalResearchBusiness.Dtos;
 
 namespace NutritionalResearchBusiness
 {
@@ -11,6 +12,8 @@ namespace NutritionalResearchBusiness
         void CreateFoodNutritionsForTesting(List<FoodNutritionsPostDto> datas);
 
         List<Foods> GetFoodsList();
+
+        NutritionalResearchStatisticalReportViewDto GetSomeoneRecordStatisticalReport(Guid recordId);
     }
 
     public class FoodNutritionsPostDto

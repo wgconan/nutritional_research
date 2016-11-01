@@ -114,6 +114,7 @@
       <DependentUpon>NRModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Dtos\AboutPageQuery.cs" />
+    <Compile Include="Dtos\AboutStatisticalReport.cs" />
     <Compile Include="Dtos\InvestigationAnswerInputDto.cs" />
     <Compile Include="Dtos\InvestigationAnswerOutputDto.cs" />
     <Compile Include="Dtos\InvestigationRecordListViewDto.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Dtos\QuestionViewDto.cs" />
     <Compile Include="Dtos\ReferenceDiagramDto.cs" />
     <Compile Include="Enums\SystemEnums.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="INRDataProcessService.cs" />
     <Compile Include="INRMainService.cs" />
@@ -156,6 +158,7 @@
     </Content>
     <Content Include="DB\NutritionalResearchDB_log.ldf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>NutritionalResearchDB.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -17,6 +17,9 @@ using NutritionalResearchBusiness;
 using NutritionalResearchBusiness.Extensions;
 using NutritionalResearchToolApplication.Controls;
 using NutritionalResearchBusiness.Enums;
+using System.Threading.Tasks;
+using NutritionalResearchToolApplication.Windows;
+using System.Threading;
 
 namespace NutritionalResearchToolApplication.Pages
 {
@@ -134,16 +137,22 @@ namespace NutritionalResearchToolApplication.Pages
                 }
                 else
                 {
-                    INRMainService myMainService = BusinessStaticInstances.GetSingleMainServiceInstance();
-                    try
+                    var task = Task.Factory.StartNew(() =>
                     {
-                        myMainService.FinishSomeoneInvestigationRecord(recordId);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("完成调查发送错误：" + ex.Message);
-                    }
-                    ReturnMainPage();
+                        INRMainService myMainService = BusinessStaticInstances.GetSingleMainServiceInstance();
+                        try
+                        {
+                            myMainService.FinishSomeoneInvestigationRecord(recordId);
+                        }
+                        catch (Exception ex)
+                        {
+                            this.Dispatcher.BeginInvoke(new Action(() => { MessageBox.Show("完成调查发送错误：" + ex.Message); }));
+                        }
+                    });
+                    WatingWindow waitingWindow = new WatingWindow(task);
+                    waitingWindow.ShowDialog();
+                    Frame myframe = App.Current.Properties["MyFrame"] as Frame;
+                    myframe.Navigate(new Uri(@"Pages\RecordListPage.xaml", UriKind.Relative));
                 }
             }
             else

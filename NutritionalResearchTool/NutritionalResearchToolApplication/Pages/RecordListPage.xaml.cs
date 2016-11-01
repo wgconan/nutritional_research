@@ -168,7 +168,7 @@ namespace NutritionalResearchToolApplication.Pages
             }
             App.Current.Properties["CurrentRecordId"] = record.Id;
             Frame myframe = App.Current.Properties["MyFrame"] as Frame;
-            myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), record.LastFinishQuestionSN + 1);
+            myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), record.LastFinishQuestionSN);
         }
 
         private void tb_ModifyAnswer_Click(object sender, RoutedEventArgs e)
@@ -183,6 +183,53 @@ namespace NutritionalResearchToolApplication.Pages
             App.Current.Properties["CurrentRecordId"] = record.Id;
             Frame myframe = App.Current.Properties["MyFrame"] as Frame;
             myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), 1);
+        }
+
+        private void tb_Audit_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            switch (record.State)
+            {
+                case InvestigationRecordStateType.NoFinish:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                case InvestigationRecordStateType.FinishedAndNoAudit:
+                    btn.Visibility = Visibility.Visible;
+                    break;
+                case InvestigationRecordStateType.FinishedAndAudited:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void tb_Audit_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            if (record.State != InvestigationRecordStateType.FinishedAndNoAudit)
+            {
+                MessageBox.Show("该调查已审核或还未完成");
+                return;
+            }
+            AuditRecordWindow auditWindow = new AuditRecordWindow(record.Id);
+            auditWindow.Closed += AuditWindow_Closed;
+            auditWindow.ShowDialog();
+        }
+
+        private void AuditWindow_Closed(object sender, EventArgs e)
+        {
+            AuditRecordWindow auditWindow = sender as AuditRecordWindow;
+            if (auditWindow != null)
+            {
+                if (auditWindow.isOk == true)
+                {
+                    DgUserDataBind();
+                }
+                auditWindow.Closed -= AuditWindow_Closed;
+            }
         }
     }
 }
