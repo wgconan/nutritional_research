@@ -64,8 +64,8 @@ namespace NutritionalResearchToolApplication.Controls
                     rb_Option4.Visibility = Visibility.Visible;
                     rb_Option5.Visibility = Visibility.Visible;
                     rb_Option6.Visibility = Visibility.Visible;
-                    rb_OptionN.Visibility = Visibility.Collapsed;
-                    tb_OptionN.Visibility = Visibility.Collapsed;
+                    rb_OptionN.Visibility = Visibility.Visible;
+                    tb_OptionN.Visibility = Visibility.Visible;
                     tb_OptionN.Text = string.Empty;
                     break;
                 case 3:
@@ -143,6 +143,7 @@ namespace NutritionalResearchToolApplication.Controls
                 img_Diagram1.Visibility = Visibility.Visible;
                 textblock_Diagram1.Visibility = Visibility.Visible;
                 img_Diagram1.Source = new BitmapImage(new Uri(_questionObj.ReferenceDiagramList[0].IconPath, UriKind.Relative));
+                img_Diagram1.Tag = _questionObj.ReferenceDiagramList[0].Value;
                 textblock_Diagram1.Text = _questionObj.ReferenceDiagramList[0].Value.ToString() + _questionObj.FoodUnit;
             }
             else
@@ -157,6 +158,7 @@ namespace NutritionalResearchToolApplication.Controls
                 img_Diagram2.Visibility = Visibility.Visible;
                 textblock_Diagram2.Visibility = Visibility.Visible;
                 img_Diagram2.Source = new BitmapImage(new Uri(_questionObj.ReferenceDiagramList[1].IconPath, UriKind.Relative));
+                img_Diagram2.Tag = _questionObj.ReferenceDiagramList[1].Value;
                 textblock_Diagram2.Text = _questionObj.ReferenceDiagramList[1].Value.ToString() + _questionObj.FoodUnit;
             }
             else
@@ -169,6 +171,7 @@ namespace NutritionalResearchToolApplication.Controls
                 img_Diagram3.Visibility = Visibility.Visible;
                 textblock_Diagram3.Visibility = Visibility.Visible;
                 img_Diagram3.Source = new BitmapImage(new Uri(_questionObj.ReferenceDiagramList[2].IconPath, UriKind.Relative));
+                img_Diagram3.Tag = _questionObj.ReferenceDiagramList[2].Value;
                 textblock_Diagram3.Text = _questionObj.ReferenceDiagramList[2].Value.ToString() + _questionObj.FoodUnit;
             }
             else
@@ -226,6 +229,8 @@ namespace NutritionalResearchToolApplication.Controls
                                     rb_Option6.IsChecked = true;
                                     break;
                                 default:
+                                    rb_OptionN.IsChecked = true;
+                                    tb_OptionN.Text = _questionObj.CurrentAnswer.AnswerValue1.Value.ToString();
                                     break;
                             }
                             break;
@@ -357,6 +362,7 @@ namespace NutritionalResearchToolApplication.Controls
             Image _image = e.Source as Image;
             if(_image != null)
             {
+                tb_Intake.Text = _image.Tag.ToString();
                 ReferenceDiagramDetailWindow window = new ReferenceDiagramDetailWindow(_image.Source);
                 window.ShowDialog();
             }

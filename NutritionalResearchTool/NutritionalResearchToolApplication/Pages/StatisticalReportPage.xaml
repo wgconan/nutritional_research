@@ -13,8 +13,11 @@
     </Page.DataContext>
     <Page.Resources>
         <ResourceDictionary>
-            <Style x:Key="dgCell" TargetType="TextBlock">
+            <Style x:Key="dgCell_Center" TargetType="TextBlock">
                 <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="dgCell_Right" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Right"/>
             </Style>
             <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -24,21 +27,21 @@
     <Grid>
         <StackPanel Orientation="Vertical" Margin="5,0">
             <TextBlock Text="膳食构成" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,10" Foreground="#FFFFAE38"/>
-            <DataGrid x:Name="dg_StructureOfMeals" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" ItemsSource="{Binding StructureOfMeals}" FontSize="16" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionUnit="Cell" SelectionMode="Single">
+            <DataGrid x:Name="dg_StructureOfMeals" IsReadOnly="True" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" ItemsSource="{Binding StructureOfMeals}" FontSize="16" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionUnit="Cell" SelectionMode="Single"  ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding StructureDescription}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="食物类别" Width="150"/>
-                    <DataGridTextColumn Binding="{Binding Intake, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="摄入量" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding Intake, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="摄入量" Width="120" ElementStyle="{StaticResource dgCell_Right}"/>
                     <DataGridTextColumn Binding="{Binding Unit}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="单位" Width="60"/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock Text="营养元素摄入量" FontSize="16" HorizontalAlignment="Center" Margin="0,30,0,10" Foreground="#FFFFAE38"/>
-            <DataGrid x:Name="dg_NutrtiveElementIntakeStatistics" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" ItemsSource="{Binding NutrtiveElementIntakeStatistics}" FontSize="16" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionUnit="Cell" SelectionMode="Single">
+            <DataGrid x:Name="dg_NutrtiveElementIntakeStatistics" IsReadOnly="True" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" ItemsSource="{Binding NutrtiveElementIntakeStatistics}" FontSize="16" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionUnit="Cell" SelectionMode="Single" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding NutritiveName}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="营养元素" Width="150"/>
-                    <DataGridTextColumn Binding="{Binding Intake, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False"  Header="摄入量" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding Intake, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False"  Header="摄入量" Width="120" ElementStyle="{StaticResource dgCell_Right}"/>
                     <DataGridTextColumn Binding="{Binding Unit}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="单位" Width="60"/>
-                    <DataGridTextColumn Binding="{Binding RNI_AI, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="RNI/AI" Width="120"/>
-                    <DataGridTextColumn Binding="{Binding RNIRatio, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="RNI%" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding RNI_AI, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="RNI/AI" Width="120" ElementStyle="{StaticResource dgCell_Right}"/>
+                    <DataGridTextColumn Binding="{Binding RNIRatio, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="RNI%" Width="120" ElementStyle="{StaticResource dgCell_Right}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock Text="填表记录" FontSize="16" HorizontalAlignment="Center" Margin="0,30,0,10" Foreground="#FFFFAE38"/>
@@ -49,13 +52,13 @@
                 </Grid.ColumnDefinitions>
                 <DataGrid Name="dg_FoodFirstCategory" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" FontSize="16" HeadersVisibility="Column" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionMode="Single" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" CanUserResizeColumns="False" SelectionChanged="dg_FoodFirstCategory_SelectionChanged">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="*" CanUserResize="False" Header="食物大类" IsReadOnly="True" ElementStyle="{StaticResource dgCell}" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Width="*" CanUserResize="False" Header="食物大类" IsReadOnly="True" ElementStyle="{StaticResource dgCell_Center}" Binding="{Binding Name}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <DataGrid Grid.Column="1" Name="dg_FoodAnswerRecord" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="16" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionMode="Single" SelectionUnit="Cell" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="50*" CanUserResize="False" Header="食物小类" IsReadOnly="True" ElementStyle="{StaticResource dgCell}" Binding="{Binding SecondCategoryName}"/>
-                        <DataGridTextColumn Width="50*" CanUserResize="False" Header="每月食用频率" IsReadOnly="True" ElementStyle="{StaticResource dgCell}" Binding="{Binding MonthlyIntakeFrequency}"/>
+                        <DataGridTextColumn Width="50*" CanUserResize="False" Header="食物小类" IsReadOnly="True" ElementStyle="{StaticResource dgCell_Center}" Binding="{Binding SecondCategoryName}"/>
+                        <DataGridTextColumn Width="50*" CanUserResize="False" Header="每月食用频率" IsReadOnly="True" ElementStyle="{StaticResource dgCell_Center}" Binding="{Binding MonthlyIntakeFrequency}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

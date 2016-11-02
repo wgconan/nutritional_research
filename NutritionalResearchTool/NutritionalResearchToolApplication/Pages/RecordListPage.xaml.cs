@@ -168,7 +168,7 @@ namespace NutritionalResearchToolApplication.Pages
             }
             App.Current.Properties["CurrentRecordId"] = record.Id;
             Frame myframe = App.Current.Properties["MyFrame"] as Frame;
-            myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), record.LastFinishQuestionSN);
+            myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), (record.LastFinishQuestionSN > 0)? record.LastFinishQuestionSN : 1);
         }
 
         private void tb_ModifyAnswer_Click(object sender, RoutedEventArgs e)
