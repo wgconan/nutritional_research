@@ -11,36 +11,36 @@ namespace NutritionalResearchBusiness.BLL
 {
     public class NRDataProcessService : INRDataProcessService
     {
-        public void CreateFoodNutritionsForTesting(List<FoodNutritionsPostDto> datas)
-        {
-            using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
-            {
-                List<FoodNutritions> _foodnutritionList = datas.Select(nObj => new FoodNutritions()
-                {
-                    Id = Guid.NewGuid(),
-                    FoodId = nObj.FoodId,
-                    NutritiveElementId = nObj.NutritiveElementId,
-                    Value = nObj.Value
-                }).ToList();
-                try
-                {
-                    mydb.FoodNutritions.AddRange(_foodnutritionList);
-                    mydb.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-        }
+        //public void CreateFoodNutritionsForTesting(List<FoodNutritionsPostDto> datas)
+        //{
+        //    using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
+        //    {
+        //        List<FoodNutritions> _foodnutritionList = datas.Select(nObj => new FoodNutritions()
+        //        {
+        //            Id = Guid.NewGuid(),
+        //            FoodId = nObj.FoodId,
+        //            NutritiveElementId = nObj.NutritiveElementId,
+        //            Value = nObj.Value
+        //        }).ToList();
+        //        try
+        //        {
+        //            mydb.FoodNutritions.AddRange(_foodnutritionList);
+        //            mydb.SaveChanges();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw ex;
+        //        }
+        //    }
+        //}
 
-        public List<Foods> GetFoodsList()
-        {
-            using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
-            {
-                return mydb.Foods.OrderBy(f => f.CreationTime).ToList();
-            }
-        }
+        //public List<Foods> GetFoodsList()
+        //{
+        //    using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
+        //    {
+        //        return mydb.Foods.OrderBy(f => f.CreationTime).ToList();
+        //    }
+        //}
 
         public NutritionalResearchStatisticalReportViewDto GetSomeoneRecordStatisticalReport(Guid recordId)
         {
@@ -54,6 +54,8 @@ namespace NutritionalResearchBusiness.BLL
                 NutritionalResearchStatisticalReportViewDto report = new NutritionalResearchStatisticalReportViewDto()
                 {
                     RecordId = record.Id,
+                    HealthBookId = record.HealthBookId,
+                    InvestigationTime = record.CreationTime,
                     Age = DateTime.Now.GetAge(record.Birthday),
                     BeforeBMI = record.BeforeBMI,
                     BeforeWeight = record.BeforeWeight,
@@ -67,7 +69,8 @@ namespace NutritionalResearchBusiness.BLL
                 };
 
                 //获取填表记录
-                record.InvestigationAnswer.Where(a => a.AnswerType != (int)AnswerType.Other).ToList().ForEach(item =>
+                //record.InvestigationAnswer.Where(a => a.AnswerType != (int)AnswerType.Other).ToList().ForEach(item =>
+                record.InvestigationAnswer.ToList().ForEach(item =>
                 {
                     var cate = (from nObj in mydb.FoodCategory
                                 join nObj2 in mydb.Question on nObj.Id equals nObj2.CategoryId
@@ -79,25 +82,60 @@ namespace NutritionalResearchBusiness.BLL
                         FirstCategoryCode = cate.FirstCategoryCode,
                         FirstCategoryName = cate.FirstCategoryName,
                         SecondCategoryCode = cate.SecondCategoryCode,
-                        SecondCategoryName = cate.StatisticsCategoryName
+                        SecondCategoryName = cate.SecondCategoryName
                     };
                     if(item.AnswerValue1.HasValue)
                     {
                         switch ((AnswerType)item.AnswerType)
                         {
                             case AnswerType.Month:
-                                answer.MonthlyIntakeFrequency = item.AnswerValue1.Value;
+                                answer.MonthlyIntakeFrequency = item.AnswerValue1.Value.ToString() + "次";
                                 break;
                             case AnswerType.Week:
-                                answer.MonthlyIntakeFrequency = item.AnswerValue1.Value * 4;
+                                answer.MonthlyIntakeFrequency = (item.AnswerValue1.Value * 4).ToString() + "次";
                                 break;
                             case AnswerType.Day:
-                                answer.MonthlyIntakeFrequency = item.AnswerValue1.Value * 28;
+                                answer.MonthlyIntakeFrequency = (item.AnswerValue1.Value * 28).ToString() + "次";
                                 break;
                             case AnswerType.Other:
+                                if(item.QuestionType == (int)QuestionType.Optional)
+                                {
+                                    if(item.AnswerValue1.Value == 1)
+                                    {
+                                        answer.MonthlyIntakeFrequency = ((int)item.AnswerValue2.GetValueOrDefault()).ToString() + "次";
+                                    }
+                                    else
+                                    {
+                                        answer.MonthlyIntakeFrequency = "0次";
+                                    }
+                                }
+                                else
+                                {
+                                    switch (item.AnswerValue1.Value)
+                                    {
+                                        case 1:
+                                            answer.MonthlyIntakeFrequency = "偏淡";
+                                            break;
+                                        case 2:
+                                            answer.MonthlyIntakeFrequency = "适中";
+                                            break;
+                                        case 3:
+                                            answer.MonthlyIntakeFrequency = "偏咸";
+                                            break;
+                                        default:
+                                            answer.MonthlyIntakeFrequency = "未知";
+                                            break;
+                                    }
+                                }
+                                break;
                             default:
                                 break; ;
                         }
+
+                    }
+                    else
+                    {
+                        answer.MonthlyIntakeFrequency = "没吃过";
                     }
                     report.FillingRecords.Add(answer);
                 });

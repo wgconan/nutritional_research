@@ -12,6 +12,14 @@ namespace NutritionalResearchBusiness.Dtos
         /// </summary>
         public Guid RecordId { get; set; }
         /// <summary>
+        /// 手册Id
+        /// </summary>
+        public string HealthBookId { get; set; }
+        /// <summary>
+        /// 调查时间
+        /// </summary>
+        public DateTime InvestigationTime { get; set; }
+        /// <summary>
         /// 孕妇姓名
         /// </summary>
         public string Name { get; set; }
@@ -108,6 +116,6 @@ namespace NutritionalResearchBusiness.Dtos
 
         public string SecondCategoryName { get; set; }
 
-        public int MonthlyIntakeFrequency { get; set; }
+        public string MonthlyIntakeFrequency { get; set; }
     }
 }

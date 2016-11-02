@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NutritionalResearchToolApplication.Windows"
         mc:Ignorable="d"
-        Title="WatingWindow" Height="80" Width="300" WindowStyle="None" MinWidth="300" MaxWidth="300" MinHeight="80" MaxHeight="80" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="WatingWindow" Height="80" Width="300" WindowStyle="None" MinWidth="300" MaxWidth="300" MinHeight="80" MaxHeight="80" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Topmost="True">
     <Grid>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="2,0">
             <TextBlock Text="正在处理，请稍后" FontSize="14" Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,5"/>

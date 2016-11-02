@@ -320,38 +320,6 @@ namespace NutritionalResearchBusiness.BLL
         private void GenerateOrUpdateReport(InvestigationRecord record, NutritionalResearchDatabaseEntities mydb)
         {
             Dictionary<FoodCategory, double> foodCategoryAverageDailyIntake = new Dictionary<FoodCategory, double>();
-            //清除旧的膳食构成报告
-            //try
-            //{
-            //    //var oldreport1 = mydb.StructureOfMeals.Where(nObj => nObj.RecordId == record.Id).ToList();
-            //    //if(oldreport1.Count > 0)
-            //    //{
-            //    //    mydb.StructureOfMeals.RemoveRange(oldreport1);
-            //    //    mydb.SaveChanges();
-            //    //}
-            //    record.StructureOfMeals.Clear();
-            //    mydb.SaveChanges();
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception("清除旧的膳食构成报告出错！", ex);
-            //}
-            ////清除旧的膳食构成报告
-            //try
-            //{
-            //    //var oldreport2 = mydb.NutrtiveElementIntakeStatistics.Where(nObj => nObj.RecordId == record.Id).ToList();
-            //    //if (oldreport2.Count > 0)
-            //    //{
-            //    //    mydb.NutrtiveElementIntakeStatistics.RemoveRange(oldreport2);
-            //    //    mydb.SaveChanges();
-            //    //}
-            //    record.NutrtiveElementIntakeStatistics.Clear();
-            //    mydb.SaveChanges();
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception("清除旧的膳食构成报告出错！", ex);
-            //}
             //计算并生成膳食构成报告
             try
             {

@@ -231,5 +231,18 @@ namespace NutritionalResearchToolApplication.Pages
                 auditWindow.Closed -= AuditWindow_Closed;
             }
         }
+
+        private void tb_ViewReport_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            if (record.State == InvestigationRecordStateType.NoFinish)
+            {
+                MessageBox.Show("该调查还未完成，没有任何报告");
+                return;
+            }
+            StatisticalReportWindow window = new StatisticalReportWindow(record.Id);
+            window.Show();
+        }
     }
 }

@@ -9,9 +9,9 @@ namespace NutritionalResearchBusiness
 {
     public interface INRDataProcessService
     {
-        void CreateFoodNutritionsForTesting(List<FoodNutritionsPostDto> datas);
+        //void CreateFoodNutritionsForTesting(List<FoodNutritionsPostDto> datas);
 
-        List<Foods> GetFoodsList();
+        //List<Foods> GetFoodsList();
 
         NutritionalResearchStatisticalReportViewDto GetSomeoneRecordStatisticalReport(Guid recordId);
     }

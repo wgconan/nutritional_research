@@ -1,0 +1,64 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NutritionalResearchToolApplication.Pages"
+      xmlns:Dtos="clr-namespace:NutritionalResearchBusiness.Dtos;assembly=NutritionalResearchBusiness" x:Class="NutritionalResearchToolApplication.Pages.StatisticalReportPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" Width="760"
+      Title="StatisticalReportPage" Loaded="Page_Loaded">
+    <Page.DataContext>
+        <Dtos:NutritionalResearchStatisticalReportViewDto/>
+    </Page.DataContext>
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="dgCell" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5,0">
+            <TextBlock Text="膳食构成" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,10" Foreground="#FFFFAE38"/>
+            <DataGrid x:Name="dg_StructureOfMeals" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" ItemsSource="{Binding StructureOfMeals}" FontSize="16" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionUnit="Cell" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding StructureDescription}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="食物类别" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding Intake, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="摄入量" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding Unit}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="单位" Width="60"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Text="营养元素摄入量" FontSize="16" HorizontalAlignment="Center" Margin="0,30,0,10" Foreground="#FFFFAE38"/>
+            <DataGrid x:Name="dg_NutrtiveElementIntakeStatistics" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" ItemsSource="{Binding NutrtiveElementIntakeStatistics}" FontSize="16" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionUnit="Cell" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding NutritiveName}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="营养元素" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding Intake, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False"  Header="摄入量" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding Unit}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="单位" Width="60"/>
+                    <DataGridTextColumn Binding="{Binding RNI_AI, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="RNI/AI" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding RNIRatio, StringFormat=\{0:F\}}" CanUserSort="False" CanUserReorder="False" CanUserResize="False" Header="RNI%" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Text="填表记录" FontSize="16" HorizontalAlignment="Center" Margin="0,30,0,10" Foreground="#FFFFAE38"/>
+            <Grid Height="360">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid Name="dg_FoodFirstCategory" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" FontSize="16" HeadersVisibility="Column" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionMode="Single" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" CanUserResizeColumns="False" SelectionChanged="dg_FoodFirstCategory_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" CanUserResize="False" Header="食物大类" IsReadOnly="True" ElementStyle="{StaticResource dgCell}" Binding="{Binding Name}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid Grid.Column="1" Name="dg_FoodAnswerRecord" MinRowHeight="25" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="16" CanUserReorderColumns="False" CanUserSortColumns="False" SelectionMode="Single" SelectionUnit="Cell" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="50*" CanUserResize="False" Header="食物小类" IsReadOnly="True" ElementStyle="{StaticResource dgCell}" Binding="{Binding SecondCategoryName}"/>
+                        <DataGridTextColumn Width="50*" CanUserResize="False" Header="每月食用频率" IsReadOnly="True" ElementStyle="{StaticResource dgCell}" Binding="{Binding MonthlyIntakeFrequency}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>
