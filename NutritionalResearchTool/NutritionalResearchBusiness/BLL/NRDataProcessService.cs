@@ -6,11 +6,160 @@ using NutritionalResearchBusiness.DAL;
 using NutritionalResearchBusiness.Dtos;
 using NutritionalResearchBusiness.Extensions;
 using NutritionalResearchBusiness.Enums;
+using NutritionalResearchBusiness.Common;
+using OfficeOpenXml;
+using System.IO;
+using OfficeOpenXml.Table;
+using OfficeOpenXml.Style;
 
 namespace NutritionalResearchBusiness.BLL
 {
     public class NRDataProcessService : INRDataProcessService
     {
+        public int ExportNutritionalResearchReport2Excel(InvestigationRecordQueryConditions conditions, string fileName)
+        {
+            using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
+            {
+                bool queryTimeFlag = (conditions.QueryStartTime == null || conditions.QueryEndTime == null) ? false : true;
+                var _result = from nObj in mydb.InvestigationRecord
+                              where nObj.Name.Contains(conditions.Name)
+                              && nObj.QueueId.Contains(conditions.QueueId)
+                              && nObj.HealthBookId.Contains(conditions.HealthBookId)
+                              && nObj.State == (int)InvestigationRecordStateType.FinishedAndAudited
+                              select nObj;
+                if (queryTimeFlag)
+                {
+                    _result = _result.Where(nObj => nObj.CreationTime >= conditions.QueryStartTime && nObj.CreationTime <= conditions.QueryEndTime);
+                }
+                if(_result.Count() == 0)
+                {
+                    return 0;
+                }
+                List<InvestigationRecord4Export> exportRecords = new List<InvestigationRecord4Export>();
+                _result = _result.OrderByDescending(nObj => nObj.CreationTime);
+                foreach (var item in _result)
+                {
+                    foreach (var a in item.InvestigationAnswer.OrderBy(a => a.QuestionSerialNumber).ToList())
+                    {
+                        var cate = (from _nObj1 in mydb.FoodCategory
+                                    join _nObj2 in mydb.Question on _nObj1.Id equals _nObj2.CategoryId
+                                    where _nObj2.Id == a.QuestionId
+                                    select _nObj1).First();
+                        InvestigationRecord4Export record = new InvestigationRecord4Export()
+                        {
+                            AuditorName = item.AuditorName,
+                            BeforeWeight = item.BeforeWeight,
+                            Birthday = item.Birthday.ToString("yyyy-MM-dd"),
+                            CurrentWeight = item.CurrentWeight,
+                            HealthBookId = item.HealthBookId,
+                            Height = item.Height,
+                            InvestigatorName = item.InvestigatorName,
+                            InvestionTime = item.CreationTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                            Name = item.Name,
+                            QueueId = item.QueueId,
+                            Week = item.Week,
+                            FoodCategoryCode = cate.SecondCategoryCode
+                        };
+                        if (a.AnswerValue1.HasValue)
+                        {
+                            switch ((AnswerType)a.AnswerType)
+                            {
+                                case AnswerType.Month:
+                                    record.MonthlyIntakeFrequency = a.AnswerValue1.Value;
+                                    record.AverageIntakePerTime = a.AnswerValue2;
+                                    break;
+                                case AnswerType.Week:
+                                    record.MonthlyIntakeFrequency = a.AnswerValue1.Value * 4;
+                                    record.AverageIntakePerTime = a.AnswerValue2;
+                                    break;
+                                case AnswerType.Day:
+                                    record.MonthlyIntakeFrequency = a.AnswerValue1.Value * 28;
+                                    record.AverageIntakePerTime = a.AnswerValue2;
+                                    break;
+                                case AnswerType.Other:
+                                    if (a.QuestionType == (int)QuestionType.Optional)
+                                    {
+                                        if (a.AnswerValue1.Value == 1)
+                                        {
+                                            record.MonthlyIntakeFrequency = (int)a.AnswerValue2.GetValueOrDefault();
+                                        }
+                                        else
+                                        {
+                                            record.MonthlyIntakeFrequency = 0;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        switch (a.AnswerValue1.Value)
+                                        {
+                                            case 1:
+                                                record.Remark = "偏淡";
+                                                break;
+                                            case 2:
+                                                record.Remark = "适中";
+                                                break;
+                                            case 3:
+                                                record.Remark = "偏咸";
+                                                break;
+                                            default:
+                                                record.Remark = "未知";
+                                                break;
+                                        }
+                                        record.MonthlyIntakeFrequency = 0;
+                                    }
+                                    record.AverageIntakePerTime = null;
+                                    break;
+                                default:
+                                    break; ;
+                            }
+
+                        }
+                        else
+                        {
+                            record.MonthlyIntakeFrequency = 0;
+                            record.AverageIntakePerTime = null;
+                        }
+                        exportRecords.Add(record);
+                    }
+                }
+                try
+                {
+                    FileInfo file = new FileInfo(fileName);
+                    var group = exportRecords.GroupBy(g => g.QueueId).ToList();
+                    using (ExcelPackage ep = new ExcelPackage(file))
+                    {
+                        ExcelWorksheet ws = ep.Workbook.Worksheets.Add(typeof(InvestigationRecord4Export).Name);
+                        ws.Cells["A1"].LoadFromCollection(exportRecords, true);
+                        ws.Cells.Style.Font.Name = "微软雅黑";
+                        ws.Cells.Style.Font.Size = 10;
+                        int startRow = 2;
+                        int endRow = 1;
+                        for (int i = 0; i < group.Count(); i++)
+                        {
+                            endRow = endRow + group[i].Count();
+                            for (int n = 1; n <= 12; n++)
+                            {
+                                ws.Cells[startRow, n, endRow, n].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+                                ws.Cells[startRow, n, endRow, n].Merge = true;
+                            }
+                            startRow = endRow + 1;
+                        }
+                        ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        for (int i = 1; i <= 16; i++)
+                        {
+                            ws.Column(i).AutoFit();
+                        }
+                        ep.Save();
+                    }
+                    return group.Count;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
         //public void CreateFoodNutritionsForTesting(List<FoodNutritionsPostDto> datas)
         //{
         //    using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())

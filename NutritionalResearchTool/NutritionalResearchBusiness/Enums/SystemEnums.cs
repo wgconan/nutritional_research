@@ -26,4 +26,20 @@ namespace NutritionalResearchBusiness.Enums
         Day = 2,
         Other = 3
     }
+
+    public enum PregnancyType
+    {
+        /// <summary>
+        /// 孕早期
+        /// </summary>
+        A,
+        /// <summary>
+        /// 孕中期
+        /// </summary>
+        B,
+        /// <summary>
+        /// 孕晚期
+        /// </summary>
+        C
+    }
 }

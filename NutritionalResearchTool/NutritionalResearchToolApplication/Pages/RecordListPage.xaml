@@ -57,7 +57,7 @@
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0F0F0">
                 <Controls:PagerControl x:Name="myPager" VerticalAlignment="Center" Margin="236,0,50,0" PagerIndexChanged="myPager_PagerIndexChanged"/>
                 <Button Name="btn_Query" Content="条件查询" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White" Click="btn_Query_Click" />
-                <Button Name="btn_Export" Content="导出" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White"/>
+                <Button Name="btn_Export" Content="导出" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White" Click="btn_Export_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

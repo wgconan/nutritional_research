@@ -17,6 +17,8 @@ using NutritionalResearchBusiness;
 using NutritionalResearchBusiness.Extensions;
 using NutritionalResearchToolApplication.Windows;
 using NutritionalResearchBusiness.Enums;
+using Microsoft.Win32;
+using System.Threading.Tasks;
 
 namespace NutritionalResearchToolApplication.Pages
 {
@@ -243,6 +245,43 @@ namespace NutritionalResearchToolApplication.Pages
             }
             StatisticalReportWindow window = new StatisticalReportWindow(record.Id);
             window.Show();
+        }
+
+        private void btn_Export_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel文件|*.xlsx";
+            if(sfd.ShowDialog() == true)
+            {
+                INRDataProcessService myDataProcessService = BusinessStaticInstances.GetSingleDataProcessServiceInstance();
+                bool exportResult = false;
+                Exception exportExcepiton = null;
+                int exportCount = 0;
+                Task task = Task.Factory.StartNew(() =>
+                {
+                    try
+                    {
+
+                        exportCount = myDataProcessService.ExportNutritionalResearchReport2Excel(condition, sfd.FileName);
+                        exportResult = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        exportResult = false;
+                        exportExcepiton = ex;
+                    }
+                });
+                WatingWindow waitwindow = new WatingWindow(task);
+                waitwindow.ShowDialog();
+                if(exportResult)
+                {
+                    MessageBox.Show("已导出" + exportCount.ToString() + "条已审核的记录");
+                }
+                else
+                {
+                    MessageBox.Show("导出失败:" + exportExcepiton.Message);
+                }
+            }
         }
     }
 }
