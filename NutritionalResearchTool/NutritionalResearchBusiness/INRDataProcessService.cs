@@ -16,6 +16,8 @@ namespace NutritionalResearchBusiness
         NutritionalResearchStatisticalReportViewDto GetSomeoneRecordStatisticalReport(Guid recordId);
 
         int ExportNutritionalResearchReport2Excel(InvestigationRecordQueryConditions conditions,string fileName);
+
+        int ExportNutritionalInvestigationRecords2Excel(InvestigationRecordQueryConditions conditions, string fileName);
     }
 
     public class FoodNutritionsPostDto

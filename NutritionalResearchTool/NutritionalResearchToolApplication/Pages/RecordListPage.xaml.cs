@@ -261,8 +261,8 @@ namespace NutritionalResearchToolApplication.Pages
                 {
                     try
                     {
-
-                        exportCount = myDataProcessService.ExportNutritionalResearchReport2Excel(condition, sfd.FileName);
+                        exportCount = myDataProcessService.ExportNutritionalInvestigationRecords2Excel(condition, sfd.FileName);
+                        //exportCount = myDataProcessService.ExportNutritionalResearchReport2Excel(condition, sfd.FileName);
                         exportResult = true;
                     }
                     catch (Exception ex)

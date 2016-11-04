@@ -222,6 +222,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\Templates\InputRecord.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Diagram\f01a\100g.jpg" />
