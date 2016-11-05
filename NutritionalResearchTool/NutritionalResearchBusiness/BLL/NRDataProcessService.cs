@@ -504,6 +504,23 @@ namespace NutritionalResearchBusiness.BLL
                 }
             }
         }
+
+        public void ExportNutritionalAnalysisReport2Excel(Guid recordId, string fileName)
+        {
+            using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
+            {
+                var record = mydb.InvestigationRecord.Where(nObj => nObj.Id == recordId && nObj.State != (int)InvestigationRecordStateType.FinishedAndAudited).SingleOrDefault();
+                if(record==null)
+                {
+                    throw new ArgumentException("无效记录Id");
+                }
+
+
+
+            }
+
+            
+        }
         public int ExportNutritionalResearchReport2Excel(InvestigationRecordQueryConditions conditions, string fileName)
         {
             using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())

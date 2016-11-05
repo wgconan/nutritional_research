@@ -18,6 +18,8 @@ namespace NutritionalResearchBusiness
         int ExportNutritionalResearchReport2Excel(InvestigationRecordQueryConditions conditions,string fileName);
 
         int ExportNutritionalInvestigationRecords2Excel(InvestigationRecordQueryConditions conditions, string fileName);
+
+        void ExportNutritionalAnalysisReport2Excel(Guid recordId, string fileName);
     }
 
     public class FoodNutritionsPostDto

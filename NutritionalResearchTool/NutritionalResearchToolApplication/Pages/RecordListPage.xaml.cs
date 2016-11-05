@@ -283,5 +283,30 @@ namespace NutritionalResearchToolApplication.Pages
                 }
             }
         }
+
+        private void tb_ExportReport_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tb_ExportReport_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            switch (record.State)
+            {
+                case InvestigationRecordStateType.NoFinish:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                case InvestigationRecordStateType.FinishedAndNoAudit:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                case InvestigationRecordStateType.FinishedAndAudited:
+                    btn.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    return;
+            }
+        }
     }
 }
