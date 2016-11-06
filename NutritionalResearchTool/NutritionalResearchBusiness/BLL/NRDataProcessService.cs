@@ -509,12 +509,64 @@ namespace NutritionalResearchBusiness.BLL
         {
             using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
             {
-                var record = mydb.InvestigationRecord.Where(nObj => nObj.Id == recordId && nObj.State != (int)InvestigationRecordStateType.FinishedAndAudited).SingleOrDefault();
+                var record = mydb.InvestigationRecord.Where(nObj => nObj.Id == recordId && nObj.State == (int)InvestigationRecordStateType.FinishedAndAudited).SingleOrDefault();
                 if(record==null)
                 {
                     throw new ArgumentException("无效记录Id");
                 }
 
+                try
+                {
+                    string templateFileName = Directory.GetCurrentDirectory() + @"\Resources\Templates\AnalysisReport.xlsx";
+                    FileInfo templateFile = new FileInfo(templateFileName);
+                    FileInfo file = new FileInfo(fileName);
+                    using (ExcelPackage ep = new ExcelPackage(templateFile))
+                    {
+                        ExcelWorksheet ws = ep.Workbook.Worksheets[1];
+                        //Head
+                        ws.Cells["B2"].Value = record.Name;
+                        ws.Cells["H2"].Value = record.Week;
+                        ws.Cells["B3"].Value = record.Height;
+                        ws.Cells["E3"].Value = record.BeforeWeight;
+                        //ws.Cells["H3"].Value = record.BeforeBMI;
+                        ws.Cells["B2"].Value = record.CurrentWeight;
+                        //StructOfMeals
+                        var myStructOfMeals = (from u in record.StructureOfMeals
+                                               orderby u.StructureCode
+                                               select u).ToList();
+                        for(int i=0;i<12;i++)
+                        {
+                            ws.Cells["B" + (9 + i).ToString()].Value = myStructOfMeals[i].Intake;
+                        }
+                        List< NutrtiveElementIntakeStatisticsViewDto > myStatisticsView = record.NutrtiveElementIntakeStatistics.Select(nObj => new NutrtiveElementIntakeStatisticsViewDto()
+                        {
+                            Id = nObj.Id,
+                            Intake = nObj.IntakeValue,
+                            NutritiveElementId = nObj.NutritiveElementId,
+                            NutritiveName = mydb.NuritiveElement.Where(n => n.Id == nObj.NutritiveElementId).Select(n => n.EnglishName ).SingleOrDefault(),
+                            RecordId = nObj.RecordId,
+                            RNIRatio = nObj.RNIRatio,
+                            RNI_AI = nObj.RNI_AIValue,
+                            Unit = mydb.NuritiveElement.Where(n => n.Id == nObj.NutritiveElementId).Select(n => n.EnglishUnit).SingleOrDefault()
+                        }).ToList();
+
+                        //NutritionIntakeStatistics
+                        List<string> NutritionElements = new List<string>() {"kcal","kj","Protein","Fat","carbo","fiber","Ca","P","K","Na","Mg","Fe","Zn","Se","Cu","Mn","cholestl","rentinol","caroten","vita","vc","ve","Thiamin","Riboflav","Niacin" };
+                        for(int i=0;i<25;i++)
+                        {
+                            var p = myStatisticsView.Where(n => n.NutritiveName == NutritionElements[i]).SingleOrDefault();
+                            ws.Cells["B" + (23+i).ToString()].Value = p.Intake;
+                            ws.Cells["D" + (23 + i).ToString()].Value = p.RNI_AI;
+                            //ws.Cells["E" + (23 + i).ToString()].Value = p.RNIRatio;
+                        }
+
+                        ep.SaveAs(file);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
 
 
             }

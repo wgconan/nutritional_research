@@ -286,7 +286,39 @@ namespace NutritionalResearchToolApplication.Pages
 
         private void tb_ExportReport_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel文件|*.xlsx";
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            if (sfd.ShowDialog() == true)
+            {
+                INRDataProcessService myDataProcessService = BusinessStaticInstances.GetSingleDataProcessServiceInstance();
+                bool exportResult = false;
+                Exception exportExcepiton = null;
+                Task task = Task.Factory.StartNew(() =>
+                {
+                    try
+                    {
+                        myDataProcessService.ExportNutritionalAnalysisReport2Excel(record.Id, sfd.FileName);
+                        exportResult = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        exportResult = false;
+                        exportExcepiton = ex;
+                    }
+                });
+                WatingWindow waitwindow = new WatingWindow(task);
+                waitwindow.ShowDialog();
+                if (exportResult)
+                {
+                    MessageBox.Show("已导出" + record.QueueId + "的营养分析报告");
+                }
+                else
+                {
+                    MessageBox.Show("导出失败:" + exportExcepiton.Message);
+                }
+            }
         }
 
         private void tb_ExportReport_Loaded(object sender, RoutedEventArgs e)
