@@ -494,5 +494,10 @@ namespace NutritionalResearchBusiness.BLL
                 }
             }
         }
+
+        public void GenerateImportRecordReport(InvestigationRecord record, NutritionalResearchDatabaseEntities mydb)
+        {
+            GenerateOrUpdateReport(record, mydb);
+        }
     }
 }

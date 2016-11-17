@@ -56,9 +56,10 @@
                 </DataGrid.DataContext>
             </DataGrid>
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFF0F0F0">
-                <Controls:PagerControl x:Name="myPager" VerticalAlignment="Center" Margin="160,0,50,0" PagerIndexChanged="myPager_PagerIndexChanged"/>
+                <Controls:PagerControl x:Name="myPager" VerticalAlignment="Center" Margin="120,0,50,0" PagerIndexChanged="myPager_PagerIndexChanged"/>
                 <Button Name="btn_Query" Content="条件查询" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White" Click="btn_Query_Click" />
                 <Button Name="btn_Export" Content="导出记录" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White" Click="btn_Export_Click"/>
+                <Button Name="btn_Import" Content="导入记录" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White" Click="btn_Import_Click" />
                 <!--<Button Name="btn_ExportReport" Content="导出报告" Width="80" Height="25" Margin="10,0" Background="#FFF6462E" Foreground="White" Click="btn_ExportReport_Click" />-->
             </StackPanel>
         </Grid>

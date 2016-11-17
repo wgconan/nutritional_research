@@ -16,6 +16,7 @@ namespace NutritionalResearchBusiness.BLL
 {
     public class NRDataProcessService : INRDataProcessService
     {
+        
         public int ExportNutritionalInvestigationRecords2Excel(InvestigationRecordQueryConditions conditions, string fileName)
         {
             using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
@@ -717,6 +718,214 @@ namespace NutritionalResearchBusiness.BLL
             }
         }
 
+        public void ImportIntakeRecordsExcel(string fileName, out int insertRow, out int existRow)
+        {
+            //分类、平均摄入量、月摄入次数
+            List<List<string>> CategoryQuestionList = new List<List<string>>();
+            CategoryQuestionList.Add(new List<string>() { "f01a", "P", "Q" });
+            CategoryQuestionList.Add(new List<string>() { "f01b", "R", "S" });
+            CategoryQuestionList.Add(new List<string>() { "f01c", "T", "U" });
+            CategoryQuestionList.Add(new List<string>() { "f01d", "V", "W" });
+            CategoryQuestionList.Add(new List<string>() { "f01e", "X", "Y" });
+            CategoryQuestionList.Add(new List<string>() { "f02a", "Z", "AA" });
+            CategoryQuestionList.Add(new List<string>() { "f02b", "AB", "AC" });
+            CategoryQuestionList.Add(new List<string>() { "f02c", "AD", "AE" });
+            CategoryQuestionList.Add(new List<string>() { "f02d", "AF", "AG" });
+            CategoryQuestionList.Add(new List<string>() { "f02e", "AH", "AI" });
+            CategoryQuestionList.Add(new List<string>() { "f02f", "AJ", "AK" });
+            CategoryQuestionList.Add(new List<string>() { "f02g", "AM", "AN" });
+            CategoryQuestionList.Add(new List<string>() { "f03a", "AO", "AP" });
+            CategoryQuestionList.Add(new List<string>() { "f03b", "AQ", "AR" });
+            CategoryQuestionList.Add(new List<string>() { "f03c", "AS", "AT" });
+            CategoryQuestionList.Add(new List<string>() { "f03d", "AU", "AV" });
+            CategoryQuestionList.Add(new List<string>() { "f03e", "AW", "AX" });
+            CategoryQuestionList.Add(new List<string>() { "f04a", "AY", "AZ" });
+            CategoryQuestionList.Add(new List<string>() { "f05a", "BA", "BB" });
+            CategoryQuestionList.Add(new List<string>() { "f05b", "BC", "BD" });
+            CategoryQuestionList.Add(new List<string>() { "f06a", "BE", "BF" });
+            CategoryQuestionList.Add(new List<string>() { "f06b", "BG", "BH" });
+            CategoryQuestionList.Add(new List<string>() { "f06c", "BI", "BJ" });
+            CategoryQuestionList.Add(new List<string>() { "f06d", "BK", "BL" });
+            CategoryQuestionList.Add(new List<string>() { "f06e", "BM", "BN" });
+            CategoryQuestionList.Add(new List<string>() { "f06f", "BO", "BP" });
+            CategoryQuestionList.Add(new List<string>() { "f06g", "BQ", "BR" });
+            CategoryQuestionList.Add(new List<string>() { "f06h", "BS", "BT" });
+            CategoryQuestionList.Add(new List<string>() { "f06i", "BU", "BV" });
+            CategoryQuestionList.Add(new List<string>() { "f06j", "BW", "BX" });
+            CategoryQuestionList.Add(new List<string>() { "f06k", "BY", "BZ" });
+            CategoryQuestionList.Add(new List<string>() { "f06l", "CA", "CB" });
+            CategoryQuestionList.Add(new List<string>() { "f07a", "CC", "CD" });
+            CategoryQuestionList.Add(new List<string>() { "f07b", "CE", "CF" });
+            CategoryQuestionList.Add(new List<string>() { "f07c", "CG", "CH" });
+            CategoryQuestionList.Add(new List<string>() { "f07d", "CI", "CJ" });
+            CategoryQuestionList.Add(new List<string>() { "f07e", "CK", "CL" });
+            CategoryQuestionList.Add(new List<string>() { "f07f", "CM", "CN" });
+            CategoryQuestionList.Add(new List<string>() { "f07g", "CO", "CP" });
+            CategoryQuestionList.Add(new List<string>() { "f07h", "CQ", "CR" });
+            CategoryQuestionList.Add(new List<string>() { "f07i", "CS", "CT" });
+            CategoryQuestionList.Add(new List<string>() { "f07j", "CU", "CV" });
+            CategoryQuestionList.Add(new List<string>() { "f07k", "CW", "CX" });
+            CategoryQuestionList.Add(new List<string>() { "f07l", "CY", "CZ" });
+            CategoryQuestionList.Add(new List<string>() { "f07m", "DA", "DB" });
+            CategoryQuestionList.Add(new List<string>() { "f07n", "DC", "DD" });
+            CategoryQuestionList.Add(new List<string>() { "f08a", "DE", "DF" });
+            CategoryQuestionList.Add(new List<string>() { "f08b", "DG", "DH" });
+            CategoryQuestionList.Add(new List<string>() { "f09a", "DI", "DJ" });
+            CategoryQuestionList.Add(new List<string>() { "f09b", "DK", "DL" });
+            CategoryQuestionList.Add(new List<string>() { "f09c", "DM", "DN" });
+            CategoryQuestionList.Add(new List<string>() { "f10a", "DO", "" });
+            CategoryQuestionList.Add(new List<string>() { "f10b", "DP", "DQ" });
+            CategoryQuestionList.Add(new List<string>() { "f10c", "DR", "DS" });
+            CategoryQuestionList.Add(new List<string>() { "f10d", "DT", "DU" });
+            CategoryQuestionList.Add(new List<string>() { "f10e", "DV", "DW" });
+            CategoryQuestionList.Add(new List<string>() { "f10f", "DX", "DY" });
+            CategoryQuestionList.Add(new List<string>() { "f10g", "DZ", "EA" });
+            CategoryQuestionList.Add(new List<string>() { "f10h", "EB", "EC" });
+            CategoryQuestionList.Add(new List<string>() { "f10i", "ED", "EE" });
+            CategoryQuestionList.Add(new List<string>() { "f10j", "EF", "EG" });
+            CategoryQuestionList.Add(new List<string>() { "f10k", "EH", "EI" });
+            CategoryQuestionList.Add(new List<string>() { "f10l", "EJ", "EK" });
+            CategoryQuestionList.Add(new List<string>() { "f11a", "EL", "" });
+            CategoryQuestionList.Add(new List<string>() { "f11b", "EM", "EN" });
+            CategoryQuestionList.Add(new List<string>() { "f12a", "", "EP" });
+            CategoryQuestionList.Add(new List<string>() { "f12b", "", "ER" });
+            CategoryQuestionList.Add(new List<string>() { "f12c", "", "ET" });
+            CategoryQuestionList.Add(new List<string>() { "f12d", "", "EV" });
+            CategoryQuestionList.Add(new List<string>() { "f13a", "", "EX" });
+            CategoryQuestionList.Add(new List<string>() { "f13b", "", "EZ" });
+            CategoryQuestionList.Add(new List<string>() { "f13c", "", "FB" });
+            CategoryQuestionList.Add(new List<string>() { "f13d", "", "FD" });
+            CategoryQuestionList.Add(new List<string>() { "f13e", "", "FF" });
+            CategoryQuestionList.Add(new List<string>() { "f14", "", "FG" });
+            CategoryQuestionList.Add(new List<string>() { "f15", "", "FH" });
+            using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())
+            {
+                FileInfo myFile = new FileInfo(fileName);
+                try
+                {
+                    using (ExcelPackage ep = new ExcelPackage(myFile))
+                    {
+                        ExcelWorksheet ws = ep.Workbook.Worksheets[1];
+                        insertRow = 0;
+                        existRow = 0;
+                        for (int i = 2; i < 65536; i++)
+                        {
+                            if (ws.Cells["A" + i.ToString()].Value.ToString() != string.Empty)
+                            {
+                                string queueId = ws.Cells["B" + i.ToString()].Value.ToString();
+                                var p = from u in mydb.InvestigationRecord
+                                        where u.QueueId == queueId
+                                        select u;
+                                if (p != null && p.Count() >0)
+                                {
+                                    existRow++;
+                                    continue;
+                                }
+                                #region InvestigationRecord
+                                InvestigationRecord newRecord = new InvestigationRecord()
+                                {
+                                    QueueId = queueId,
+                                    Id = Guid.NewGuid(),
+
+                                    BeforeWeight = Convert.ToDouble(ws.Cells["K" + i.ToString()].Value),
+                                    Birthday = Convert.ToDateTime(ws.Cells["F" + i.ToString()].Value),
+                                    CreationTime = DateTime.Now,
+                                    CurrentWeight = Convert.ToDouble(ws.Cells["J" + i.ToString()].Value),
+                                    HealthBookId = ws.Cells["D" + i.ToString()].Value.ToString(),
+                                    Height = Convert.ToDouble(ws.Cells["I" + i.ToString()].Value),
+                                    InvestigatorName = ws.Cells["M" + i.ToString()].Value.ToString(),
+                                    Name = ws.Cells["E"].Value.ToString(),
+
+                                    AuditorName = ws.Cells["N" + i.ToString()].Value.ToString(),
+
+                                    UpdatetionTime = DateTime.Now,
+                                    Week = Convert.ToInt32(ws.Cells["G" + i.ToString()].Value),
+                                };
+                                if (newRecord.AuditorName != string.Empty)
+                                {
+                                    newRecord.AuditTime = DateTime.Now;
+                                    newRecord.State = (int)InvestigationRecordStateType.FinishedAndAudited;
+                                }
+                                else
+                                {
+                                    newRecord.AuditTime = null;
+                                    newRecord.State = (int)InvestigationRecordStateType.FinishedAndNoAudit;
+                                }
+                                switch (ws.Cells["C" + i.ToString()].Value.ToString())
+                                {
+                                    case "A":
+                                        newRecord.Stage = 1;
+                                        break;
+                                    case "B":
+                                        newRecord.Stage = 2;
+                                        break;
+                                    case "C":
+                                        newRecord.Stage = 3;
+                                        break;
+                                }
+                                mydb.InvestigationRecord.Add(newRecord);
+                                
+                                #endregion
+                                #region  InvestigationAnswer;
+
+                                foreach(var j in CategoryQuestionList)
+                                {
+                                    var q = from u in mydb.FoodCategory
+                                            join v in mydb.Question on u.Id equals v.CategoryId
+                                            where u.SecondCategoryCode == j.First()
+                                            select v;
+                                    if (q == null || q.Count() != 1)
+                                    {
+                                        continue;
+                                    }
+
+                                    InvestigationAnswer newAnswer = new InvestigationAnswer()
+                                    {
+                                        Id = Guid.NewGuid(),
+                                        InvestigationRecord = newRecord,
+                                        InvestigationRecordId = newRecord.Id,
+                                        AnswerType = 0,
+                                        //AnswerValue1 = Convert.ToInt32(ws.Cells[j[2] + i.ToString()].Value),
+                                        //AnswerValue2 = Convert.ToDouble(ws.Cells[j[1] + i.ToString()].Value),
+                                        CreationTime = DateTime.Now,
+                                        QuestionId = q.First().Id,
+                                        QuestionType = q.First().Type,
+                                        QuestionSerialNumber = q.First().SerialNumber
+                                    };
+                                    if(ws.Cells[j[2]+i.ToString()].Value.ToString() == string.Empty )
+                                    {
+                                        newAnswer.AnswerValue1 = null;
+                                        newAnswer.AnswerValue2 = null;
+                                    }
+                                    else
+                                    {
+                                        int frequence = Convert.ToInt32(ws.Cells[j[2] + i.ToString()].Value);
+                                        if (frequence == 0  )
+                                        {
+                                            newAnswer.AnswerValue1 = 0;
+                                            newAnswer.AnswerValue2 = null;
+                                        }
+                                    }
+                                    mydb.InvestigationAnswer.Add(newAnswer);
+                                }
+                                #endregion
+                                mydb.SaveChanges();
+                                insertRow++;
+                                new NRMainService().GenerateImportRecordReport(newRecord, mydb);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch (Exception )
+                {
+                    throw;
+                }
+            }
+        }
         //public void CreateFoodNutritionsForTesting(List<FoodNutritionsPostDto> datas)
         //{
         //    using (NutritionalResearchDatabaseEntities mydb = new NutritionalResearchDatabaseEntities())

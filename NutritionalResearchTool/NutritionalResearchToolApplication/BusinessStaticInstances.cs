@@ -21,5 +21,6 @@ namespace NutritionalResearchToolApplication
         {
             return (NRMainServiceInstance != null) ? NRMainServiceInstance : new NRMainService();
         }
+
     }
 }

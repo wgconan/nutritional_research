@@ -340,5 +340,42 @@ namespace NutritionalResearchToolApplication.Pages
                     return;
             }
         }
+
+        private void btn_Import_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel文件|*.xlsx";
+            if (sfd.ShowDialog() == true)
+            {
+                INRDataProcessService myDataProcessService = BusinessStaticInstances.GetSingleDataProcessServiceInstance();
+                bool importResult = false;
+                Exception exportExcepiton = null;
+                int importCount = 0;
+                int existCount = 0;
+                Task task = Task.Factory.StartNew(() =>
+                {
+                    try
+                    {
+                        myDataProcessService.ImportIntakeRecordsExcel(sfd.FileName, out importCount, out existCount );
+                        importResult = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        importResult = false;
+                        exportExcepiton = ex;
+                    }
+                });
+                WatingWindow waitwindow = new WatingWindow(task);
+                waitwindow.ShowDialog();
+                if (importResult)
+                {
+                    MessageBox.Show("已导入" + importCount.ToString() + "条记录，有" + existCount + "条记录已存在，没有导入。");
+                }
+                else
+                {
+                    MessageBox.Show("导出失败:" + exportExcepiton.Message);
+                }
+            }
+        }
     }
 }
