@@ -12,6 +12,8 @@ using System.IO;
 using OfficeOpenXml.Table;
 using OfficeOpenXml.Style;
 
+using System.Diagnostics;
+
 namespace NutritionalResearchBusiness.BLL
 {
     public class NRDataProcessService : INRDataProcessService
@@ -206,8 +208,8 @@ namespace NutritionalResearchBusiness.BLL
                                         ws.Cells["AI" + currentRow.ToString()].Value = u.MonthlyIntakeFrequency;
                                         break;
                                     case "f02f":
-                                        ws.Cells["AJ" + currentRow.ToString()].Value = u.AverageIntakePerTime;
-                                        ws.Cells["AK" + currentRow.ToString()].Value = u.MonthlyIntakeFrequency;
+                                        ws.Cells["AK" + currentRow.ToString()].Value = u.AverageIntakePerTime;
+                                        ws.Cells["AL" + currentRow.ToString()].Value = u.MonthlyIntakeFrequency;
                                         break;
                                     case "f02g":
                                         ws.Cells["AM" + currentRow.ToString()].Value = u.AverageIntakePerTime;
@@ -732,7 +734,7 @@ namespace NutritionalResearchBusiness.BLL
             CategoryQuestionList.Add(new List<string>() { "f02c", "AD", "AE" });
             CategoryQuestionList.Add(new List<string>() { "f02d", "AF", "AG" });
             CategoryQuestionList.Add(new List<string>() { "f02e", "AH", "AI" });
-            CategoryQuestionList.Add(new List<string>() { "f02f", "AJ", "AK" });
+            CategoryQuestionList.Add(new List<string>() { "f02f", "AK", "AL" });
             CategoryQuestionList.Add(new List<string>() { "f02g", "AM", "AN" });
             CategoryQuestionList.Add(new List<string>() { "f03a", "AO", "AP" });
             CategoryQuestionList.Add(new List<string>() { "f03b", "AQ", "AR" });
@@ -810,7 +812,7 @@ namespace NutritionalResearchBusiness.BLL
                         existRow = 0;
                         for (int i = 2; i < 65536; i++)
                         {
-                            if (ws.Cells["A" + i.ToString()].Value.ToString() != string.Empty)
+                            if (ws.Cells["A" + i.ToString()].Value != null && ws.Cells["A" + i.ToString()].Value.ToString() != string.Empty)
                             {
                                 string queueId = ws.Cells["B" + i.ToString()].Value.ToString();
                                 var p = from u in mydb.InvestigationRecord
@@ -822,25 +824,38 @@ namespace NutritionalResearchBusiness.BLL
                                     continue;
                                 }
                                 #region InvestigationRecord
-                                InvestigationRecord newRecord = new InvestigationRecord()
+                                InvestigationRecord newRecord = new InvestigationRecord();
+                                newRecord.QueueId = queueId;
+                                newRecord.Id = Guid.NewGuid();
+                                newRecord.CreationTime = DateTime.Now;
+                                object birthday = ws.Cells["F" + i.ToString()].Value;
+                                if (birthday is double)
                                 {
-                                    QueueId = queueId,
-                                    Id = Guid.NewGuid(),
-
-                                    BeforeWeight = Convert.ToDouble(ws.Cells["K" + i.ToString()].Value),
-                                    Birthday = Convert.ToDateTime(ws.Cells["F" + i.ToString()].Value),
-                                    CreationTime = DateTime.Now,
-                                    CurrentWeight = Convert.ToDouble(ws.Cells["J" + i.ToString()].Value),
-                                    HealthBookId = ws.Cells["D" + i.ToString()].Value.ToString(),
-                                    Height = Convert.ToDouble(ws.Cells["I" + i.ToString()].Value),
-                                    InvestigatorName = ws.Cells["M" + i.ToString()].Value.ToString(),
-                                    Name = ws.Cells["E"].Value.ToString(),
-
-                                    AuditorName = ws.Cells["N" + i.ToString()].Value.ToString(),
-
-                                    UpdatetionTime = DateTime.Now,
-                                    Week = Convert.ToInt32(ws.Cells["G" + i.ToString()].Value),
-                                };
+                                    newRecord.Birthday = DateTime.FromOADate(double.Parse(birthday.ToString()));
+                                }
+                                else if(birthday is DateTime)
+                                {
+                                    newRecord.Birthday = Convert.ToDateTime(birthday);
+                                }
+                                newRecord.BeforeWeight = Convert.ToDouble(ws.Cells["K" + i.ToString()].Value);
+                                newRecord.CurrentWeight = Convert.ToDouble(ws.Cells["J" + i.ToString()].Value);
+                                newRecord.HealthBookId = ws.Cells["D" + i.ToString()].Value.ToString();
+                                newRecord.Height = Convert.ToDouble(ws.Cells["I" + i.ToString()].Value);
+                                newRecord.BeforeBMI = newRecord.BeforeWeight / newRecord.Height / newRecord.Height * 10000;
+                                newRecord.Name = ws.Cells["E" + i.ToString()].Value.ToString();
+                                newRecord.InvestigatorName = ws.Cells["M" + i.ToString()].Value.ToString();
+                                if(ws.Cells["N" + i.ToString()].Value!=null)
+                                {
+                                    newRecord.AuditorName = ws.Cells["N" + i.ToString()].Value.ToString();
+                                }
+                                else
+                                {
+                                    newRecord.AuditorName = string.Empty;
+                                }
+                                
+                                newRecord.UpdatetionTime = null;
+                                newRecord.Week = Convert.ToInt32(ws.Cells["G" + i.ToString()].Value);
+                                
                                 if (newRecord.AuditorName != string.Empty)
                                 {
                                     newRecord.AuditTime = DateTime.Now;
@@ -867,46 +882,74 @@ namespace NutritionalResearchBusiness.BLL
                                 
                                 #endregion
                                 #region  InvestigationAnswer;
-
                                 foreach(var j in CategoryQuestionList)
                                 {
-                                    var q = from u in mydb.FoodCategory
-                                            join v in mydb.Question on u.Id equals v.CategoryId
-                                            where u.SecondCategoryCode == j.First()
-                                            select v;
+                                    string categoryCode = j.First();
+                                    var r = from u in mydb.FoodCategory
+                                            where u.SecondCategoryCode == categoryCode
+                                            select u;
+                                    if(r == null || r.Count() !=1)
+                                    {
+                                        continue;
+                                    }
+                                    Guid categoryId = r.First().Id;
+                                    var q = from u in mydb.Question
+                                            where u.CategoryId == categoryId
+                                            select u;
                                     if (q == null || q.Count() != 1)
                                     {
                                         continue;
+                                    }
+                                    int? frequence;
+                                    double? averageIntake;
+                                    if(j[2] == string.Empty)
+                                    { frequence = null; }
+                                    else
+                                    {
+                                        if (j[2] != string.Empty && ws.Cells[j[2] + i.ToString()].Value != null)
+                                        {
+                                            frequence = Convert.ToInt32(ws.Cells[j[2] + i.ToString()].Value);
+                                            Debug.WriteLine("current frequence cells is ws.Cells[" + j[2] + i.ToString() + "] = " + ws.Cells[j[2] + i.ToString()].Value.ToString() + ";");
+                                        }
+                                        else
+                                        {
+                                            frequence = null;
+                                            Debug.WriteLine("current frequence cells is ws.Cells[" + j[2] + i.ToString() + "] =  \"\";");
+                                        }
+                                    }
+                                    if (j[1] == string.Empty)
+                                    {
+                                        averageIntake = null;
+                                    }
+                                    else
+                                    {
+                                        if (ws.Cells[j[1] + i.ToString()].Value != null)
+                                        {
+                                            averageIntake = Convert.ToDouble(ws.Cells[j[1] + i.ToString()].Value);
+                                            Debug.WriteLine("current value cell is ws.Cells[" + j[1] + i.ToString() + "] = " + ws.Cells[j[1] + i.ToString()].Value.ToString() + ";");
+                                        }
+                                        else
+                                        {
+                                            averageIntake = null;
+                                            Debug.WriteLine("current value cell is ws.Cells[" + j[1] + i.ToString() + "] =  \"\";");
+                                        }
                                     }
 
                                     InvestigationAnswer newAnswer = new InvestigationAnswer()
                                     {
                                         Id = Guid.NewGuid(),
-                                        InvestigationRecord = newRecord,
                                         InvestigationRecordId = newRecord.Id,
                                         AnswerType = 0,
-                                        //AnswerValue1 = Convert.ToInt32(ws.Cells[j[2] + i.ToString()].Value),
-                                        //AnswerValue2 = Convert.ToDouble(ws.Cells[j[1] + i.ToString()].Value),
                                         CreationTime = DateTime.Now,
                                         QuestionId = q.First().Id,
                                         QuestionType = q.First().Type,
                                         QuestionSerialNumber = q.First().SerialNumber
                                     };
-                                    if(ws.Cells[j[2]+i.ToString()].Value.ToString() == string.Empty )
-                                    {
-                                        newAnswer.AnswerValue1 = null;
-                                        newAnswer.AnswerValue2 = null;
-                                    }
-                                    else
-                                    {
-                                        int frequence = Convert.ToInt32(ws.Cells[j[2] + i.ToString()].Value);
-                                        if (frequence == 0  )
-                                        {
-                                            newAnswer.AnswerValue1 = 0;
-                                            newAnswer.AnswerValue2 = null;
-                                        }
-                                    }
-                                    mydb.InvestigationAnswer.Add(newAnswer);
+
+                                    newAnswer.AnswerValue1 = frequence;
+                                    newAnswer.AnswerValue2 = averageIntake;
+                                  
+                                    newRecord.InvestigationAnswer.Add(newAnswer);
                                 }
                                 #endregion
                                 mydb.SaveChanges();
@@ -920,8 +963,9 @@ namespace NutritionalResearchBusiness.BLL
                         }
                     }
                 }
-                catch (Exception )
+                catch (Exception ex)
                 {
+                    string message = ex.Message;
                     throw;
                 }
             }

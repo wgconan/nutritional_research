@@ -343,9 +343,10 @@ namespace NutritionalResearchToolApplication.Pages
 
         private void btn_Import_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Excel文件|*.xlsx";
-            if (sfd.ShowDialog() == true)
+            OpenFileDialog ofd = new OpenFileDialog();
+            //SaveFileDialog sfd = new SaveFileDialog();
+            ofd.Filter = "Excel文件|*.xlsx";
+            if (ofd.ShowDialog() == true)
             {
                 INRDataProcessService myDataProcessService = BusinessStaticInstances.GetSingleDataProcessServiceInstance();
                 bool importResult = false;
@@ -356,7 +357,7 @@ namespace NutritionalResearchToolApplication.Pages
                 {
                     try
                     {
-                        myDataProcessService.ImportIntakeRecordsExcel(sfd.FileName, out importCount, out existCount );
+                        myDataProcessService.ImportIntakeRecordsExcel(ofd.FileName, out importCount, out existCount );
                         importResult = true;
                     }
                     catch (Exception ex)
