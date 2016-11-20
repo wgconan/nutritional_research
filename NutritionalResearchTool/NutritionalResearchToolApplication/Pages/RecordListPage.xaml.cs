@@ -170,7 +170,7 @@ namespace NutritionalResearchToolApplication.Pages
             }
             App.Current.Properties["CurrentRecordId"] = record.Id;
             Frame myframe = App.Current.Properties["MyFrame"] as Frame;
-            myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), (record.LastFinishQuestionSN > 0)? record.LastFinishQuestionSN : 1);
+            myframe.Navigate(new Uri(@"Pages\QuestionPage.xaml", UriKind.Relative), (record.LastFinishQuestionSN > 0) ? record.LastFinishQuestionSN : 1);
         }
 
         private void tb_ModifyAnswer_Click(object sender, RoutedEventArgs e)
@@ -251,7 +251,7 @@ namespace NutritionalResearchToolApplication.Pages
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel文件|*.xlsx";
-            if(sfd.ShowDialog() == true)
+            if (sfd.ShowDialog() == true)
             {
                 INRDataProcessService myDataProcessService = BusinessStaticInstances.GetSingleDataProcessServiceInstance();
                 bool exportResult = false;
@@ -273,7 +273,7 @@ namespace NutritionalResearchToolApplication.Pages
                 });
                 WatingWindow waitwindow = new WatingWindow(task);
                 waitwindow.ShowDialog();
-                if(exportResult)
+                if (exportResult)
                 {
                     MessageBox.Show("已导出" + exportCount.ToString() + "条已审核的记录");
                 }
@@ -357,7 +357,7 @@ namespace NutritionalResearchToolApplication.Pages
                 {
                     try
                     {
-                        myDataProcessService.ImportIntakeRecordsExcel(ofd.FileName, out importCount, out existCount );
+                        myDataProcessService.ImportIntakeRecordsExcel(ofd.FileName, out importCount, out existCount);
                         importResult = true;
                     }
                     catch (Exception ex)
@@ -374,8 +374,60 @@ namespace NutritionalResearchToolApplication.Pages
                 }
                 else
                 {
-                    MessageBox.Show("导出失败:" + exportExcepiton.Message);
+                    MessageBox.Show("导入记录失败:" + exportExcepiton.Message);
                 }
+            }
+        }
+
+        private void tb_PrintReport_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            switch (record.State)
+            {
+                case InvestigationRecordStateType.NoFinish:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                case InvestigationRecordStateType.FinishedAndNoAudit:
+                    btn.Visibility = Visibility.Collapsed;
+                    break;
+                case InvestigationRecordStateType.FinishedAndAudited:
+                    btn.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void tb_PrintReport_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            InvestigationRecordViewDto record = btn.Tag as InvestigationRecordViewDto;
+            INRDataProcessService myDataProcessService = BusinessStaticInstances.GetSingleDataProcessServiceInstance();
+            bool exportResult = false;
+            Exception exportExcepiton = null;
+            Task task = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    myDataProcessService.ExportNutritionalAnalysisReport2Print(record.Id);
+                    exportResult = true;
+                }
+                catch (Exception ex)
+                {
+                    exportResult = false;
+                    exportExcepiton = ex;
+                }
+            });
+            WatingWindow waitwindow = new WatingWindow(task);
+            waitwindow.ShowDialog();
+            if (!exportResult)
+            {
+                MessageBox.Show("报告导出失败:" + exportExcepiton.Message);
+            }
+            else
+            {
+                MessageBox.Show("请在Excel中打印报告。\r\n请关闭excel后，再打印下一份报告。");
             }
         }
     }

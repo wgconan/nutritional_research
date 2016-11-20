@@ -46,6 +46,7 @@
                                     <Button Name="tb_ViewReport" Content="查看报告" FontSize="12" Width="60" Margin="5,0" Tag="{Binding Mode=OneWay}" Loaded="tb_ViewReport_Loaded" Click="tb_ViewReport_Click"/>
                                     <Button Name="tb_Audit" Content="审核" FontSize="12" Width="40" Margin="5,0" Tag="{Binding Mode=OneWay}" Loaded="tb_Audit_Loaded" Click="tb_Audit_Click"/>
                                     <Button Name="tb_ExportReport" Content="导出报告" FontSize="12" Width="60" Margin="5,0" Tag="{Binding Mode=OneWay}" Click="tb_ExportReport_Click" Loaded="tb_ExportReport_Loaded" />
+                                    <Button Name="tb_PrintReport" Content="打印报告" FontSize="12" Width="60" Margin="5,0" Tag="{Binding Mode=OneWay}"  Click="tb_PrintReport_Click" Loaded="tb_PrintReport_Loaded"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

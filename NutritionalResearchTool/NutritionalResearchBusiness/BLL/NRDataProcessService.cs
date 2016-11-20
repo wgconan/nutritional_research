@@ -1126,5 +1126,34 @@ namespace NutritionalResearchBusiness.BLL
                 return report;
             }
         }
+
+        public void ExportNutritionalAnalysisReport2Print(Guid recordId)
+        {
+            //string templateFileName = Directory.GetCurrentDirectory() + @"\Resources\Templates\AnalysisReport.xlsx";
+            string fileName = Directory.GetCurrentDirectory() + @"\Output\PrintAnalysisReport.xlsx";
+            string filePath = Directory.GetCurrentDirectory() + @"\Output";
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+            try
+            {
+                ExportNutritionalAnalysisReport2Excel(recordId, fileName);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            Process proc;
+            try
+            {
+                proc = Process.Start(fileName);
+            }
+            catch(System.ComponentModel.Win32Exception)
+            {
+                throw;
+            }
+        }
     }
 }
