@@ -371,6 +371,7 @@ namespace NutritionalResearchToolApplication.Pages
                 if (importResult)
                 {
                     MessageBox.Show("已导入" + importCount.ToString() + "条记录，有" + existCount + "条记录已存在，没有导入。");
+                    Page_Loaded(sender, e);
                 }
                 else
                 {
